@@ -1,0 +1,64 @@
+{
+  "name": "taimos-cdk-constructs",
+  "version": "1.0.0",
+  "description": "Higher level constructs for AWS CDK",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf coverage dist doc",
+    "compile": "tsc -p tsconfig.json",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "nyc -x tst -e .ts --temp-directory 'coverage/nyc-output' -r html -r text-summary -r cobertura _mocha --require ts-node/register 'tst/**/*.spec.ts' --reporter nyan",
+    "doc": "typedoc --excludeExternals --mode file --out doc lib/",
+    "build": "npm-run-all clean compile lint test doc",
+    "prerelease": "npm run build",
+    "release": "git add -A && standard-version -a"
+  },
+  "standard-version": {
+    "scripts": {
+      "posttag": "git push && git push --tags"
+    }
+  },
+  "keywords": [
+    "Cloudformation",
+    "CDK"
+  ],
+  "author": "Taimos GmbH",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/taimos/cdk-constructs.git"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^0.24.1",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.24",
+    "@types/sinon": "^7.0.5",
+    "aws-cdk": "^0.24.1",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nock": "^10.0.6",
+    "npm-run-all": "^4.1.5",
+    "nyc": "^13.2.0",
+    "rimraf": "^2.6.3",
+    "sinon": "^7.2.3",
+    "standard-version": "^4.4.0",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.12.1",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "@aws-cdk/alexa-ask": "^0.24.1",
+    "@aws-cdk/aws-cloudformation": "^0.24.1",
+    "@aws-cdk/aws-codebuild": "^0.24.1",
+    "@aws-cdk/aws-codecommit": "^0.24.1",
+    "@aws-cdk/aws-codepipeline": "^0.24.1",
+    "@aws-cdk/aws-codepipeline-api": "^0.24.1",
+    "@aws-cdk/aws-ecr": "^0.24.1",
+    "@aws-cdk/aws-iam": "^0.24.1",
+    "@aws-cdk/aws-secretsmanager": "^0.24.1",
+    "@aws-cdk/cdk": "^0.24.1"
+  }
+}
