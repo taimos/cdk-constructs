@@ -1,11 +1,11 @@
-import {AlexaSkillDeployAction} from '@aws-cdk/alexa-ask';
-import {CloudFormationCapabilities, PipelineCreateReplaceChangeSetAction, PipelineExecuteChangeSetAction} from '@aws-cdk/aws-cloudformation';
-import {LinuxBuildImage, Project, S3BucketBuildArtifacts} from '@aws-cdk/aws-codebuild';
-import {PipelineSourceAction, Repository} from '@aws-cdk/aws-codecommit';
-import {GitHubSourceAction, Pipeline} from '@aws-cdk/aws-codepipeline';
-import {Bucket, PipelineDeployAction} from '@aws-cdk/aws-s3';
-import {SecretString} from '@aws-cdk/aws-secretsmanager';
-import {App, Aws, Secret, Stack} from '@aws-cdk/cdk';
+import { AlexaSkillDeployAction } from '@aws-cdk/alexa-ask';
+import { CloudFormationCapabilities, PipelineCreateReplaceChangeSetAction, PipelineExecuteChangeSetAction } from '@aws-cdk/aws-cloudformation';
+import { LinuxBuildImage, Project, S3BucketBuildArtifacts } from '@aws-cdk/aws-codebuild';
+import { PipelineSourceAction, Repository } from '@aws-cdk/aws-codecommit';
+import { GitHubSourceAction, Pipeline } from '@aws-cdk/aws-codepipeline';
+import { Bucket, PipelineDeployAction } from '@aws-cdk/aws-s3';
+import { SecretString } from '@aws-cdk/aws-secretsmanager';
+import { App, Aws, ScopedAws, Secret, Stack } from '@aws-cdk/cdk';
 
 export interface AlexaSkillDeploymentConfig {
     skillId : string;
@@ -21,32 +21,34 @@ export class AlexaSkillPipelineStack extends Stack {
     constructor(parent : App, config : AlexaSkillDeploymentConfig) {
         super(parent, `${config.skillName}-pipeline`);
         this.templateOptions.description = `The deployment pipeline for ${config.skillName}`;
-        const aws = new Aws(this);
+        const aws = new ScopedAws(this);
 
         const pipeline = new Pipeline(this, 'Pipeline', {});
 
         // Source
-        const sourceStage = pipeline.addStage('Source');
-
         let sourceAction;
 
         if (config.githubOwner && config.githubRepo) {
-            const githubAccessToken = new SecretString(this, 'GithubToken', {secretId: config.githubSecretId || 'GitHub'});
-            sourceAction = new GitHubSourceAction(this, 'GitHubSource', {
-                stage: sourceStage,
+            const githubAccessToken = new SecretString(this, 'GithubToken', { secretId: config.githubSecretId || 'GitHub' });
+            sourceAction = new GitHubSourceAction({
                 owner: config.githubOwner,
                 repo: config.githubRepo,
                 branch: config.branch || 'master',
                 oauthToken: new Secret(githubAccessToken.jsonFieldValue('Token')),
+                outputArtifactName: 'SourceCode',
+                actionName: 'GithubSource',
             });
         } else {
-            const codecommit = new Repository(this, 'CodeCommitRepo', {repositoryName: config.skillName});
-            sourceAction = new PipelineSourceAction(this, 'CodeCommitSource', {
-                stage: sourceStage,
+            const codecommit = new Repository(this, 'CodeCommitRepo', { repositoryName: config.skillName });
+            sourceAction = new PipelineSourceAction({
                 branch: config.branch || 'master',
                 repository: codecommit,
+                outputArtifactName: 'SourceCode',
+                actionName: 'CodeCommitSource',
             });
         }
+        const sourceStage = pipeline.addStage({ name: 'Source' });
+        sourceStage.addAction(sourceAction);
 
         // Build
         const buildProject = new Project(this, 'BuildProject', {
@@ -102,49 +104,52 @@ export class AlexaSkillPipelineStack extends Stack {
             ],
         });
 
-        const buildStage = pipeline.addStage('Build');
-        const buildAction = buildProject.addToPipeline(buildStage, 'CodeBuild', {
+        const buildAction = buildProject.toCodePipelineBuildAction({
             inputArtifact: sourceAction.outputArtifact,
             outputArtifactName: 'output',
             additionalOutputArtifactNames: ['assets'],
+            actionName: 'CodeBuild',
         });
+        const buildStage = pipeline.addStage({ name: 'Build' });
+        buildStage.addAction(buildAction);
 
         // Deploy
-        const deployStage = pipeline.addStage('Deploy');
+        const deployStage = pipeline.addStage({ name: 'Deploy' });
         const stackName = config.skillName;
         const changeSetName = 'StagedChangeSet';
 
-        new PipelineCreateReplaceChangeSetAction(this, 'PrepareChangesTest', {
-            stage: deployStage,
+        deployStage.addAction(new PipelineCreateReplaceChangeSetAction({
+            actionName: 'PrepareChangesTest',
             runOrder: 1,
             stackName,
             changeSetName,
             adminPermissions: true,
             templatePath: buildAction.outputArtifact.atPath('cfn.packaged.yaml'),
             capabilities: CloudFormationCapabilities.NamedIAM,
-        });
+        }));
 
-        const executePipeline = new PipelineExecuteChangeSetAction(this, 'ExecuteChangesTest', {
-            stage: deployStage,
+        const executePipeline = new PipelineExecuteChangeSetAction({
+            actionName: 'ExecuteChangesTest',
             runOrder: 2,
             stackName,
             changeSetName,
             outputFileName: 'overrides.json',
             outputArtifactName: 'CloudFormation',
         });
+        deployStage.addAction(executePipeline);
 
-        new PipelineDeployAction(this, 'DeployAssets', {
-            stage: deployStage,
+        deployStage.addAction(new PipelineDeployAction({
+            actionName: 'DeployAssets',
             runOrder: 3,
             bucket: Bucket.import(this, 'DeployBucket', {
                 bucketName: `${aws.accountId}-${stackName}-${aws.region}-assets`,
             }),
             inputArtifact: buildAction.additionalOutputArtifact('assets'),
-        });
+        }));
 
-        const alexaSecrets = new SecretString(this, 'AlexaSecrets', {secretId: config.AlexaSecretId || 'Alexa'});
-        new AlexaSkillDeployAction(this, 'DeploySkill', {
-            stage: deployStage,
+        const alexaSecrets = new SecretString(this, 'AlexaSecrets', { secretId: config.AlexaSecretId || 'Alexa' });
+        deployStage.addAction(new AlexaSkillDeployAction({
+            actionName: 'DeploySkill',
             runOrder: 4,
             inputArtifact: buildAction.outputArtifact,
             parameterOverridesArtifact: executePipeline.outputArtifact,
@@ -152,7 +157,6 @@ export class AlexaSkillPipelineStack extends Stack {
             clientSecret: new Secret(alexaSecrets.jsonFieldValue('ClientSecret')),
             refreshToken: new Secret(alexaSecrets.jsonFieldValue('RefreshToken')),
             skillId: config.skillId,
-        });
-
+        }));
     }
 }

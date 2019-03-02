@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>cdk-constructs</title>
+	<title>taimos-cdk-constructs</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">cdk-constructs</a>
+					<a href="index.html" class="title">taimos-cdk-constructs</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> cdk-constructs</h1>
+			<h1> taimos-cdk-constructs</h1>
 		</div>
 	</div>
 </header>
@@ -62,6 +62,41 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<h1 id="alexa-deployment-pipeline">Alexa Deployment Pipeline</h1>
+				<p>This construct creates a CodePipeline to deploy Alexa Skills to Lambda and to the Developer console usning AWS SAM and teh DeployToAlexa action of CodePipeline.</p>
+				<h2 id="prerequisits">Prerequisits</h2>
+				<p>You need to create secrets in SecretManager containing access to the Alexa Developer Console and optionally to GitHub when your code resides there.</p>
+				<h3 id="alexa-credentials">Alexa Credentials</h3>
+				<p>First of all, generate a client and a token using the official documentation: <a href="https://developer.amazon.com/docs/smapi/ask-cli-command-reference.html#generate-lwa-tokens">https://developer.amazon.com/docs/smapi/ask-cli-command-reference.html#generate-lwa-tokens</a></p>
+				<p>The create a Secret with the field: <code>ClientId</code>, <code>ClientSecret</code> and <code>RefreshToken</code></p>
+				<h3 id="github">GitHub</h3>
+				<p>Create a personal access token and store it in a secret with one Key/Value pair named <code>Token</code></p>
+				<h3 id="code-layout">Code layout</h3>
+				<p>...</p>
+				<h2 id="usage">Usage</h2>
+				<p>The library provides a class called <code>AlexaSkillPipelineStack</code> which can be added to your CDK app.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { App } <span class="hljs-keyword">from</span> <span class="hljs-string">'@aws-cdk/cdk'</span>;
+<span class="hljs-keyword">import</span> { AlexaSkillPipelineStack } <span class="hljs-keyword">from</span> <span class="hljs-string">'taimos-cdk-constructs'</span>;
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> App();
+<span class="hljs-keyword">new</span> AlexaSkillPipelineStack(app, {
+  skillName: <span class="hljs-string">'my-skill'</span>,
+  githubOwner: <span class="hljs-string">'taimos'</span>,
+  githubRepo: <span class="hljs-string">'my-skill'</span>,
+  skillId: <span class="hljs-string">'amzn1.ask.skill.????????-????-????-????-????????????'</span>,
+});
+app.run();</code></pre>
+				<p>The following options can be specified:</p>
+				<ul>
+					<li><code>skillId</code> - Skill Id in the develoepr console (mandatory)</li>
+					<li><code>skillName</code> - Skill name without spaces or special characters. (mandatory)</li>
+					<li><code>branch</code> - The branch to deploy. (Default <code>master</code>)</li>
+					<li><code>githubOwner</code> - The owner of the GitHub project</li>
+					<li><code>githubRepo</code> - The repo name in GitHub</li>
+					<li><code>githubSecretId</code> - The name of the SecretsManager secret containing the GitHub token (Default: <code>GitHub</code>)</li>
+					<li><code>AlexaSecretId</code> - The name of the SecretsManager secret containing the Developer console token (Default: <code>Alexa</code>)</li>
+				</ul>
+				<p>If you do not specify GitHub owner and repo, the stack will create a CodeCommit repository instead of deploying from GitHub.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

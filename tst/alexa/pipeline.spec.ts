@@ -1,6 +1,6 @@
-import {expect, haveResource} from '@aws-cdk/assert';
-import {App} from '@aws-cdk/cdk';
-import {AlexaSkillPipelineStack} from '../../lib';
+import { expect, haveResource } from '@aws-cdk/assert';
+import { App } from '@aws-cdk/cdk';
+import { AlexaSkillPipelineStack } from '../../lib';
 
 describe('Alexa Pipeline generation', () => {
 
