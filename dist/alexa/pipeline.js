@@ -47,14 +47,15 @@ class AlexaSkillPipelineStack extends cdk_1.Stack {
                         commands: ['pip install --upgrade awscli'],
                     },
                     pre_build: {
-                        commands: ['npm install --prefix skill/', 'npm install --prefix voice-interface/'],
+                        commands: ['npm install --prefix skill/', 'npm install --prefix voice-interface/', 'npm install --prefix deployment/'],
                     },
                     build: {
                         commands: [
                             'npm test --prefix skill/',
                             'npm run build --prefix skill/',
                             'npm run build --prefix voice-interface/',
-                            `aws cloudformation package --template-file cfn.yaml --s3-bucket ${pipeline.artifactBucket.bucketName} --output-template-file cfn.packaged.yaml`,
+                            'npm run skill:synth --prefix deployment/',
+                            `aws cloudformation package --template-file ${config.skillName}.template.yaml --s3-bucket ${pipeline.artifactBucket.bucketName} --output-template-file cfn.packaged.yaml`,
                         ],
                     },
                 },

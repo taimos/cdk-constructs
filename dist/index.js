@@ -4,4 +4,5 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./alexa/pipeline"));
+__export(require("./alexa/skill"));
 //# sourceMappingURL=index.js.map

@@ -30,12 +30,12 @@
     "url": "git+ssh://git@github.com/taimos/cdk-constructs.git"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^0.25.0",
+    "@aws-cdk/assert": "0.25.2",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
     "@types/node": "^11.10.4",
     "@types/sinon": "^7.0.8",
-    "aws-cdk": "^0.25.0",
+    "aws-cdk": "0.25.2",
     "chai": "^4.2.0",
     "mocha": "^6.0.2",
     "nock": "^10.0.6",
@@ -50,15 +50,16 @@
     "typescript": "^3.3.3333"
   },
   "dependencies": {
-    "@aws-cdk/alexa-ask": "^0.25.0",
-    "@aws-cdk/aws-cloudformation": "^0.25.0",
-    "@aws-cdk/aws-codebuild": "^0.25.0",
-    "@aws-cdk/aws-codecommit": "^0.25.0",
-    "@aws-cdk/aws-codepipeline": "^0.25.0",
-    "@aws-cdk/aws-codepipeline-api": "^0.25.0",
-    "@aws-cdk/aws-ecr": "^0.25.0",
-    "@aws-cdk/aws-iam": "^0.25.0",
-    "@aws-cdk/aws-secretsmanager": "^0.25.0",
-    "@aws-cdk/cdk": "^0.25.0"
+    "@aws-cdk/alexa-ask": "0.25.2",
+    "@aws-cdk/aws-cloudformation": "0.25.2",
+    "@aws-cdk/aws-codebuild": "0.25.2",
+    "@aws-cdk/aws-codecommit": "0.25.2",
+    "@aws-cdk/aws-codepipeline": "0.25.2",
+    "@aws-cdk/aws-codepipeline-api": "0.25.2",
+    "@aws-cdk/aws-ecr": "0.25.2",
+    "@aws-cdk/aws-iam": "0.25.2",
+    "@aws-cdk/aws-secretsmanager": "0.25.2",
+    "@aws-cdk/aws-serverless": "0.25.2",
+    "@aws-cdk/cdk": "0.25.2"
   }
 }

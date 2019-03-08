@@ -3,11 +3,8 @@ doc/
 lib/
 node_modules/
 tst/
-gulpfile.js
-gulpfile-base.js
 package-lock.json
 tsconfig.json
 tslint.json
 .idea/
 .editorconfig
-.travis.yml
