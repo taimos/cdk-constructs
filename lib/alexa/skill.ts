@@ -22,14 +22,7 @@ export class AlexaSkillStack extends Stack {
         const assetBucket = new Bucket(this, 'AssetBucket', {
             bucketName: `${aws.accountId}-${config.skillName}-${aws.region}-assets`,
         });
-
-        const assetBucketPolicy = new BucketPolicy(this, 'AssetBucketPolicy', {
-            bucket: assetBucket,
-        });
-        assetBucketPolicy.document.addStatement(new PolicyStatement()
-            .addAction('s3:GetObject')
-            .addAnyPrincipal()
-            .addResource(`${assetBucket.bucketArn}/*`));
+        assetBucket.grantPublicAccess();
 
         const userTable = new CfnSimpleTable(this, 'AttributesTable', {
             primaryKey: {
@@ -56,6 +49,7 @@ export class AlexaSkillStack extends Stack {
                     ...config.environment,
                     TABLE_NAME: userTable.ref,
                     ASSET_BUCKET: assetBucket.bucketName,
+                    ASSET_BUCKET_URL: assetBucket.bucketUrl,
                     SKILL_ID: config.skillId,
                 },
             },

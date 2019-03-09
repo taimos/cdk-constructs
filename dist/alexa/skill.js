@@ -13,13 +13,7 @@ class AlexaSkillStack extends cdk_1.Stack {
         const assetBucket = new aws_s3_1.Bucket(this, 'AssetBucket', {
             bucketName: `${aws.accountId}-${config.skillName}-${aws.region}-assets`,
         });
-        const assetBucketPolicy = new aws_s3_1.BucketPolicy(this, 'AssetBucketPolicy', {
-            bucket: assetBucket,
-        });
-        assetBucketPolicy.document.addStatement(new aws_iam_1.PolicyStatement()
-            .addAction('s3:GetObject')
-            .addAnyPrincipal()
-            .addResource(`${assetBucket.bucketArn}/*`));
+        assetBucket.grantPublicAccess();
         const userTable = new aws_serverless_1.CfnSimpleTable(this, 'AttributesTable', {
             primaryKey: {
                 name: config.userAttribute || 'userId',
@@ -41,7 +35,7 @@ class AlexaSkillStack extends cdk_1.Stack {
                 },
             ],
             environment: {
-                variables: Object.assign({}, config.environment, { TABLE_NAME: userTable.ref, ASSET_BUCKET: assetBucket.bucketName, SKILL_ID: config.skillId }),
+                variables: Object.assign({}, config.environment, { TABLE_NAME: userTable.ref, ASSET_BUCKET: assetBucket.bucketName, ASSET_BUCKET_URL: assetBucket.bucketUrl, SKILL_ID: config.skillId }),
             },
         };
         if (config.thundraKey) {
