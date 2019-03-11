@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AlexaSkillConfig | taimos-cdk-constructs</title>
+	<title>SimpleCodeBuildConfig | taimos-cdk-constructs</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="alexaskillconfig.html">AlexaSkillConfig</a>
+					<a href="simplecodebuildconfig.html">SimpleCodeBuildConfig</a>
 				</li>
 			</ul>
-			<h1>Interface AlexaSkillConfig</h1>
+			<h1>Interface SimpleCodeBuildConfig</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AlexaSkillConfig</span>
+						<span class="target">SimpleCodeBuildConfig</span>
 					</li>
 				</ul>
 			</section>
@@ -79,11 +79,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#environment" class="tsd-kind-icon">environment</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#skillid" class="tsd-kind-icon">skill<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#skillname" class="tsd-kind-icon">skill<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#thundrakey" class="tsd-kind-icon">thundra<wbr>Key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#userattribute" class="tsd-kind-icon">user<wbr>Attribute</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="simplecodebuildconfig.html#alertemail" class="tsd-kind-icon">alert<wbr>Email</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="simplecodebuildconfig.html#branch" class="tsd-kind-icon">branch</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="simplecodebuildconfig.html#githubowner" class="tsd-kind-icon">github<wbr>Owner</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="simplecodebuildconfig.html#githubrepo" class="tsd-kind-icon">github<wbr>Repo</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="simplecodebuildconfig.html#githubsecretid" class="tsd-kind-icon">github<wbr>Secret<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="simplecodebuildconfig.html#usebuildspecfile" class="tsd-kind-icon">use<wbr>Build<wbr>Spec<wbr>File</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,60 +93,62 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="environment" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> environment</h3>
-					<div class="tsd-signature tsd-kind-icon">environment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="alertemail" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> alert<wbr>Email</h3>
+					<div class="tsd-signature tsd-kind-icon">alert<wbr>Email<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/alexa/skill.ts#L12">alexa/skill.ts:12</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="skillid" class="tsd-anchor"></a>
-					<h3>skill<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">skill<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/alexa/skill.ts#L9">alexa/skill.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/ci/simple-codebuild.ts#L12">ci/simple-codebuild.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="skillname" class="tsd-anchor"></a>
-					<h3>skill<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">skill<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="branch" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> branch</h3>
+					<div class="tsd-signature tsd-kind-icon">branch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/alexa/skill.ts#L10">alexa/skill.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/ci/simple-codebuild.ts#L9">ci/simple-codebuild.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="thundrakey" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> thundra<wbr>Key</h3>
-					<div class="tsd-signature tsd-kind-icon">thundra<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="githubowner" class="tsd-anchor"></a>
+					<h3>github<wbr>Owner</h3>
+					<div class="tsd-signature tsd-kind-icon">github<wbr>Owner<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/alexa/skill.ts#L11">alexa/skill.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/ci/simple-codebuild.ts#L7">ci/simple-codebuild.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="userattribute" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> user<wbr>Attribute</h3>
-					<div class="tsd-signature tsd-kind-icon">user<wbr>Attribute<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="githubrepo" class="tsd-anchor"></a>
+					<h3>github<wbr>Repo</h3>
+					<div class="tsd-signature tsd-kind-icon">github<wbr>Repo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/alexa/skill.ts#L13">alexa/skill.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/ci/simple-codebuild.ts#L8">ci/simple-codebuild.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="githubsecretid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> github<wbr>Secret<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">github<wbr>Secret<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/ci/simple-codebuild.ts#L10">ci/simple-codebuild.ts:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="usebuildspecfile" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> use<wbr>Build<wbr>Spec<wbr>File</h3>
+					<div class="tsd-signature tsd-kind-icon">use<wbr>Build<wbr>Spec<wbr>File<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/be3d459/lib/ci/simple-codebuild.ts#L11">ci/simple-codebuild.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -170,36 +173,39 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/simplecodebuildstack.html" class="tsd-kind-icon">Simple<wbr>Code<wbr>Build<wbr>Stack</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="alexaskillconfig.html" class="tsd-kind-icon">Alexa<wbr>Skill<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="alexaskilldeploymentconfig.html" class="tsd-kind-icon">Alexa<wbr>Skill<wbr>Deployment<wbr>Config</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="alexaskillconfig.html" class="tsd-kind-icon">Alexa<wbr>Skill<wbr>Config</a>
+						<a href="simplecodebuildconfig.html" class="tsd-kind-icon">Simple<wbr>Code<wbr>Build<wbr>Config</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#environment" class="tsd-kind-icon">environment</a>
+								<a href="simplecodebuildconfig.html#alertemail" class="tsd-kind-icon">alert<wbr>Email</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#skillid" class="tsd-kind-icon">skill<wbr>Id</a>
+								<a href="simplecodebuildconfig.html#branch" class="tsd-kind-icon">branch</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#skillname" class="tsd-kind-icon">skill<wbr>Name</a>
+								<a href="simplecodebuildconfig.html#githubowner" class="tsd-kind-icon">github<wbr>Owner</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#thundrakey" class="tsd-kind-icon">thundra<wbr>Key</a>
+								<a href="simplecodebuildconfig.html#githubrepo" class="tsd-kind-icon">github<wbr>Repo</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#userattribute" class="tsd-kind-icon">user<wbr>Attribute</a>
+								<a href="simplecodebuildconfig.html#githubsecretid" class="tsd-kind-icon">github<wbr>Secret<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="simplecodebuildconfig.html#usebuildspecfile" class="tsd-kind-icon">use<wbr>Build<wbr>Spec<wbr>File</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="alexaskilldeploymentconfig.html" class="tsd-kind-icon">Alexa<wbr>Skill<wbr>Deployment<wbr>Config</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="simplecodebuildconfig.html" class="tsd-kind-icon">Simple<wbr>Code<wbr>Build<wbr>Config</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
