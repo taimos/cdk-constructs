@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/taimos-cdk-constructs.svg)](https://badge.fury.io/js/taimos-cdk-constructs)
-![Build Status](https://codebuild.eu-west-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiZ0hyVkREUHJEUlRVNTZmTWp4RjJTVVlhZnQ3RG1QUitNSUU4TDE4dDdSeU1yOCtWWHNuTTQ2SHVYVlQzVnFuNmRaU2d6ZDJVVEdkeDhQQjJhaVpDM3lrPSIsIml2UGFyYW1ldGVyU3BlYyI6IndwcmtRRmc5Mnk4bTZKSG4iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
+![Build Status](https://codebuild.eu-west-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoieEFBVDZIcTZpZUQxMm1LS1hqckdTdnhCdm5CSHRlOXB1WkIrK1d2OHplRERMb1ExNk9zMGRWcm5ZZXIwaWlnRDVyTkFDZWNDdTRYQWFSckx3OW1jYjJVPSIsIml2UGFyYW1ldGVyU3BlYyI6IjkrS3NacTN5NU4xU3FXNXMiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 
 This repository contains a library with higher-level constructs for AWS CDK (https://github.com/awslabs/aws-cdk) written in TypeScript.
 
