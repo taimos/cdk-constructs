@@ -16,7 +16,7 @@ class AlexaSkillStack extends cdk_1.Stack {
         assetBucket.grantPublicAccess();
         const userTable = new aws_serverless_1.CfnSimpleTable(this, 'AttributesTable', {
             primaryKey: {
-                name: config.userAttribute || 'userId',
+                name: config.userAttribute || 'id',
                 type: 'String',
             },
         });
@@ -40,7 +40,7 @@ class AlexaSkillStack extends cdk_1.Stack {
         };
         if (config.thundraKey) {
             functionConfig.runtime = 'provided';
-            functionConfig.layers = [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:6`];
+            functionConfig.layers = [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:7`];
             functionConfig.environment
                 .variables.thundra_apiKey = config.thundraKey;
         }

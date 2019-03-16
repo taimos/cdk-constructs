@@ -1,7 +1,6 @@
 import { PolicyStatement } from '@aws-cdk/aws-iam';
 import { CfnPermission } from '@aws-cdk/aws-lambda';
-import { Bucket, BucketPolicy } from '@aws-cdk/aws-s3';
-import { SecretString } from '@aws-cdk/aws-secretsmanager';
+import { Bucket } from '@aws-cdk/aws-s3';
 import { CfnFunction, CfnFunctionProps, CfnSimpleTable } from '@aws-cdk/aws-serverless';
 import { App, DeletionPolicy, Fn, Output, ScopedAws, Secret, Stack } from '@aws-cdk/cdk';
 
@@ -26,7 +25,7 @@ export class AlexaSkillStack extends Stack {
 
         const userTable = new CfnSimpleTable(this, 'AttributesTable', {
             primaryKey: {
-                name: config.userAttribute || 'userId',
+                name: config.userAttribute || 'id',
                 type: 'String',
             },
         });
@@ -56,7 +55,7 @@ export class AlexaSkillStack extends Stack {
         };
         if (config.thundraKey) {
             functionConfig.runtime = 'provided';
-            functionConfig.layers = [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:6`];
+            functionConfig.layers = [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:7`];
             ((functionConfig.environment as CfnFunction.FunctionEnvironmentProperty)
                 .variables as { [key : string] : string }).thundra_apiKey = config.thundraKey;
         }
