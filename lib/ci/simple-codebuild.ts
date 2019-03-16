@@ -1,7 +1,7 @@
 import { GitHubSource, LinuxBuildImage, Project } from '@aws-cdk/aws-codebuild';
 import { SecretString } from '@aws-cdk/aws-secretsmanager';
 import { Topic } from '@aws-cdk/aws-sns';
-import { App, ScopedAws, Secret, Stack } from '@aws-cdk/cdk';
+import { App, Secret, Stack } from '@aws-cdk/cdk';
 
 export interface SimpleCodeBuildConfig {
     githubOwner : string;
@@ -16,7 +16,6 @@ export class SimpleCodeBuildStack extends Stack {
     constructor(parent : App, config : SimpleCodeBuildConfig) {
         super(parent, `${config.githubOwner}-${config.githubRepo}-codebuild`);
         this.templateOptions.description = `The CodeBuild project for repo ${config.githubOwner}/${config.githubRepo}`;
-        const aws = new ScopedAws(this);
 
         const githubAccessToken = new SecretString(this, 'GithubToken', { secretId: config.githubSecretId || 'GitHub' });
         const buildSpec = {

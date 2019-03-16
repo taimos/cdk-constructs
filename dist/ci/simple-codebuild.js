@@ -8,7 +8,6 @@ class SimpleCodeBuildStack extends cdk_1.Stack {
     constructor(parent, config) {
         super(parent, `${config.githubOwner}-${config.githubRepo}-codebuild`);
         this.templateOptions.description = `The CodeBuild project for repo ${config.githubOwner}/${config.githubRepo}`;
-        const aws = new cdk_1.ScopedAws(this);
         const githubAccessToken = new aws_secretsmanager_1.SecretString(this, 'GithubToken', { secretId: config.githubSecretId || 'GitHub' });
         const buildSpec = {
             version: 0.2,
