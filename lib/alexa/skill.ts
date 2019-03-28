@@ -1,14 +1,26 @@
 import { PolicyStatement } from '@aws-cdk/aws-iam';
 import { CfnPermission } from '@aws-cdk/aws-lambda';
 import { Bucket } from '@aws-cdk/aws-s3';
-import { CfnFunction, CfnFunctionProps, CfnSimpleTable } from '@aws-cdk/aws-serverless';
-import { App, DeletionPolicy, Fn, Output, ScopedAws, Secret, Stack } from '@aws-cdk/cdk';
+import { CfnFunction, CfnFunctionProps, CfnSimpleTable } from '@aws-cdk/aws-sam';
+import { App, CfnOutput, DeletionPolicy, Fn, ScopedAws, Secret, Stack } from '@aws-cdk/cdk';
 
 export interface AlexaSkillConfig {
+    /** The Alexa Skill id */
     skillId : string;
+
+    /** The Alexa Skill name */
     skillName : string;
+
+    /** Optional API Key for Thundra */
     thundraKey? : string;
+
+    /** Environement variables for the Lambda function */
     environment? : { [key : string] : string };
+
+    /**
+     * name of the user attribute for DynamoDB
+     * @default id
+     */
     userAttribute? : string;
 }
 
@@ -29,12 +41,12 @@ export class AlexaSkillStack extends Stack {
                 type: 'String',
             },
         });
-        const functionConfig : CfnFunctionProps = {
-            handler: 'bundle.handler',
+        const skillFunction = new CfnFunction(this, 'SkillFunction', {
+            handler: 'dist/index.handler',
             runtime: 'nodejs8.10',
             timeout: 10,
             autoPublishAlias: 'latest',
-            codeUri: './skill/dist/bundle.js',
+            codeUri: './skill/dist/bundle.zip',
             policies: [
                 {
                     statement: new PolicyStatement()
@@ -50,16 +62,14 @@ export class AlexaSkillStack extends Stack {
                     ASSET_BUCKET: assetBucket.bucketName,
                     ASSET_BUCKET_URL: assetBucket.bucketUrl,
                     SKILL_ID: config.skillId,
+                    ...config.thundraKey && { thundra_apiKey: config.thundraKey },
                 },
             },
-        };
-        if (config.thundraKey) {
-            functionConfig.runtime = 'provided';
-            functionConfig.layers = [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:7`];
-            ((functionConfig.environment as CfnFunction.FunctionEnvironmentProperty)
-                .variables as { [key : string] : string }).thundra_apiKey = config.thundraKey;
-        }
-        const skillFunction = new CfnFunction(this, 'SkillFunction', functionConfig);
+            ...config.thundraKey && {
+                runtime: 'provided',
+                layers: [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:7`],
+            },
+        });
 
         const skillFunctionPermission = new CfnPermission(this, 'SkillFunctionPermission', {
             action: 'lambda:invokeFunction',
@@ -70,7 +80,7 @@ export class AlexaSkillStack extends Stack {
         skillFunctionPermission.options.deletionPolicy = DeletionPolicy.Retain;
         skillFunctionPermission.options.updateReplacePolicy = DeletionPolicy.Retain;
 
-        const deployOutput = new Output(this, 'overrides', {
+        const deployOutput = new CfnOutput(this, 'overrides', {
             // tslint:disable-next-line:no-invalid-template-strings
             value: Fn.sub('{"manifest": {"apis": {"custom": {"endpoint": {"uri": "${SkillFunction.Version}"}}}}}'),
         });
