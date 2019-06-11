@@ -13,7 +13,9 @@ npm install taimos-cdk-constructs
 
 # Constructs
 
-* [Deployment Pipeline for Alexa Skills](lib/README.md)
+* [Deployment Pipeline and Skill Blueprint for Alexa](lib/alexa/README.md)
+* [Hosting for Single Page Application](lib/web/single_page_app.ts)
+* [Simple CodeBuild project for NodeJS projects](lib/ci/simple-codebuild.ts)
 
 # Contributing
 
