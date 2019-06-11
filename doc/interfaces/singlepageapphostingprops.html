@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AlexaSkillConfig | taimos-cdk-constructs</title>
+	<title>SinglePageAppHostingProps | taimos-cdk-constructs</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="alexaskillconfig.html">AlexaSkillConfig</a>
+					<a href="singlepageapphostingprops.html">SinglePageAppHostingProps</a>
 				</li>
 			</ul>
-			<h1>Interface AlexaSkillConfig</h1>
+			<h1>Interface SinglePageAppHostingProps</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AlexaSkillConfig</span>
+						<span class="target">SinglePageAppHostingProps</span>
 					</li>
 				</ul>
 			</section>
@@ -79,11 +79,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#environment" class="tsd-kind-icon">environment</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#skillid" class="tsd-kind-icon">skill<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#skillname" class="tsd-kind-icon">skill<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#thundrakey" class="tsd-kind-icon">thundra<wbr>Key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="alexaskillconfig.html#userattribute" class="tsd-kind-icon">user<wbr>Attribute</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="singlepageapphostingprops.html#certarn" class="tsd-kind-icon">cert<wbr>Arn</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="singlepageapphostingprops.html#zoneid" class="tsd-kind-icon">zone<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="singlepageapphostingprops.html#zonename" class="tsd-kind-icon">zone<wbr>Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,92 +90,34 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="environment" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> environment</h3>
-					<div class="tsd-signature tsd-kind-icon">environment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="certarn" class="tsd-anchor"></a>
+					<h3>cert<wbr>Arn</h3>
+					<div class="tsd-signature tsd-kind-icon">cert<wbr>Arn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/752b268/lib/alexa/skill.ts#L18">alexa/skill.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/752b268/lib/web/single_page_app.ts#L9">web/single_page_app.ts:9</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Environement variables for the Lambda function</p>
-						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-						</ul>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="skillid" class="tsd-anchor"></a>
-					<h3>skill<wbr>Id</h3>
-					<div class="tsd-signature tsd-kind-icon">skill<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="zoneid" class="tsd-anchor"></a>
+					<h3>zone<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">zone<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/752b268/lib/alexa/skill.ts#L9">alexa/skill.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/752b268/lib/web/single_page_app.ts#L10">web/single_page_app.ts:10</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The Alexa Skill id</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="skillname" class="tsd-anchor"></a>
-					<h3>skill<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">skill<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="zonename" class="tsd-anchor"></a>
+					<h3>zone<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">zone<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/752b268/lib/alexa/skill.ts#L12">alexa/skill.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/752b268/lib/web/single_page_app.ts#L11">web/single_page_app.ts:11</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The Alexa Skill name</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="thundrakey" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> thundra<wbr>Key</h3>
-					<div class="tsd-signature tsd-kind-icon">thundra<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/752b268/lib/alexa/skill.ts#L15">alexa/skill.ts:15</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Optional API Key for Thundra</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="userattribute" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> user<wbr>Attribute</h3>
-					<div class="tsd-signature tsd-kind-icon">user<wbr>Attribute<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/752b268/lib/alexa/skill.ts#L24">alexa/skill.ts:24</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>name of the user attribute for DynamoDB</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>default</dt>
-							<dd><p>id</p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -203,39 +143,33 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/singlepageapphosting.html" class="tsd-kind-icon">Single<wbr>Page<wbr>App<wbr>Hosting</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="alexaskillconfig.html" class="tsd-kind-icon">Alexa<wbr>Skill<wbr>Config</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#environment" class="tsd-kind-icon">environment</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#skillid" class="tsd-kind-icon">skill<wbr>Id</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#skillname" class="tsd-kind-icon">skill<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#thundrakey" class="tsd-kind-icon">thundra<wbr>Key</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="alexaskillconfig.html#userattribute" class="tsd-kind-icon">user<wbr>Attribute</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="alexaskilldeploymentconfig.html" class="tsd-kind-icon">Alexa<wbr>Skill<wbr>Deployment<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="simplecodebuildconfig.html" class="tsd-kind-icon">Simple<wbr>Code<wbr>Build<wbr>Config</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="singlepageapphostingprops.html" class="tsd-kind-icon">Single<wbr>Page<wbr>App<wbr>Hosting<wbr>Props</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="singlepageapphostingprops.html#certarn" class="tsd-kind-icon">cert<wbr>Arn</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="singlepageapphostingprops.html#zoneid" class="tsd-kind-icon">zone<wbr>Id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="singlepageapphostingprops.html#zonename" class="tsd-kind-icon">zone<wbr>Name</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>
