@@ -1,14 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const aws_codebuild_1 = require("@aws-cdk/aws-codebuild");
-const aws_secretsmanager_1 = require("@aws-cdk/aws-secretsmanager");
+const aws_events_targets_1 = require("@aws-cdk/aws-events-targets");
 const aws_sns_1 = require("@aws-cdk/aws-sns");
 const cdk_1 = require("@aws-cdk/cdk");
 class SimpleCodeBuildStack extends cdk_1.Stack {
     constructor(parent, config) {
         super(parent, `${config.githubOwner}-${config.githubRepo}-codebuild`);
         this.templateOptions.description = `The CodeBuild project for repo ${config.githubOwner}/${config.githubRepo}`;
-        const githubAccessToken = new aws_secretsmanager_1.SecretString(this, 'GithubToken', { secretId: config.githubSecretId || 'GitHub' });
         const buildSpec = {
             version: 0.2,
             phases: {
@@ -32,7 +31,6 @@ class SimpleCodeBuildStack extends cdk_1.Stack {
         const source = new aws_codebuild_1.GitHubSource({
             owner: config.githubOwner,
             repo: config.githubRepo,
-            oauthToken: new cdk_1.Secret(githubAccessToken.jsonFieldValue('Token')),
             webhook: true,
             reportBuildStatus: true,
         });
@@ -46,7 +44,7 @@ class SimpleCodeBuildStack extends cdk_1.Stack {
             description: `The CodeBuild project for repo ${config.githubOwner}/${config.githubRepo}`,
             projectName: `${config.githubOwner}-${config.githubRepo}`,
         });
-        buildProject.onBuildFailed('BuildFailed', alertTopic);
+        buildProject.onBuildFailed('BuildFailed', { target: new aws_events_targets_1.SnsTopic(alertTopic) });
     }
 }
 exports.SimpleCodeBuildStack = SimpleCodeBuildStack;

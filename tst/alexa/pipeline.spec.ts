@@ -1,4 +1,4 @@
-import { expect, haveResource } from '@aws-cdk/assert';
+import { expect, haveResource, SynthUtils } from '@aws-cdk/assert';
 import { App } from '@aws-cdk/cdk';
 import { AlexaSkillPipelineStack } from '../../lib';
 
@@ -14,6 +14,7 @@ describe('Alexa Pipeline generation', () => {
         });
 
         expect(testee).to(haveResource('AWS::CodePipeline::Pipeline'));
+        // console.log(JSON.stringify(SynthUtils.toCloudFormation(testee, {}), null, 2));
     });
 
 });

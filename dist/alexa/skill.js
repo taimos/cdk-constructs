@@ -28,10 +28,10 @@ class AlexaSkillStack extends cdk_1.Stack {
                         .addResource(cdk_1.Fn.sub('arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${AttributesTable}')),
                 },
             ], environment: {
-                variables: Object.assign({}, config.environment, { TABLE_NAME: userTable.ref, ASSET_BUCKET: assetBucket.bucketName, ASSET_BUCKET_URL: assetBucket.bucketUrl, SKILL_ID: config.skillId }, config.thundraKey && { thundra_apiKey: config.thundraKey }),
+                variables: Object.assign({}, config.environment, { TABLE_NAME: userTable.ref, ASSET_BUCKET: assetBucket.bucketName, ASSET_BUCKET_URL: assetBucket.bucketWebsiteUrl, SKILL_ID: config.skillId }, config.thundraKey && { thundra_apiKey: config.thundraKey }),
             } }, config.thundraKey && {
             runtime: 'provided',
-            layers: [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:7`],
+            layers: [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:12`],
         }));
         const skillFunctionPermission = new aws_lambda_1.CfnPermission(this, 'SkillFunctionPermission', {
             action: 'lambda:invokeFunction',

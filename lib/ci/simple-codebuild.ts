@@ -1,7 +1,7 @@
 import { GitHubSource, LinuxBuildImage, Project } from '@aws-cdk/aws-codebuild';
-import { SecretString } from '@aws-cdk/aws-secretsmanager';
+import { SnsTopic } from '@aws-cdk/aws-events-targets';
 import { Topic } from '@aws-cdk/aws-sns';
-import { App, Secret, Stack } from '@aws-cdk/cdk';
+import { App, Stack } from '@aws-cdk/cdk';
 
 export interface SimpleCodeBuildConfig {
     githubOwner : string;
@@ -17,7 +17,6 @@ export class SimpleCodeBuildStack extends Stack {
         super(parent, `${config.githubOwner}-${config.githubRepo}-codebuild`);
         this.templateOptions.description = `The CodeBuild project for repo ${config.githubOwner}/${config.githubRepo}`;
 
-        const githubAccessToken = new SecretString(this, 'GithubToken', { secretId: config.githubSecretId || 'GitHub' });
         const buildSpec = {
             version: 0.2,
             phases: {
@@ -43,7 +42,6 @@ export class SimpleCodeBuildStack extends Stack {
         const source = new GitHubSource({
             owner: config.githubOwner,
             repo: config.githubRepo,
-            oauthToken: new Secret(githubAccessToken.jsonFieldValue('Token')),
             webhook: true,
             reportBuildStatus: true,
         });
@@ -57,6 +55,6 @@ export class SimpleCodeBuildStack extends Stack {
             description: `The CodeBuild project for repo ${config.githubOwner}/${config.githubRepo}`,
             projectName: `${config.githubOwner}-${config.githubRepo}`,
         });
-        buildProject.onBuildFailed('BuildFailed', alertTopic);
+        buildProject.onBuildFailed('BuildFailed', {target: new SnsTopic(alertTopic)});
     }
 }

@@ -1,8 +1,8 @@
 import { PolicyStatement } from '@aws-cdk/aws-iam';
 import { CfnPermission } from '@aws-cdk/aws-lambda';
 import { Bucket } from '@aws-cdk/aws-s3';
-import { CfnFunction, CfnFunctionProps, CfnSimpleTable } from '@aws-cdk/aws-sam';
-import { App, CfnOutput, DeletionPolicy, Fn, ScopedAws, Secret, Stack } from '@aws-cdk/cdk';
+import { CfnFunction, CfnSimpleTable } from '@aws-cdk/aws-sam';
+import { App, CfnOutput, DeletionPolicy, Fn, ScopedAws, Stack } from '@aws-cdk/cdk';
 
 export interface AlexaSkillConfig {
     /** The Alexa Skill id */
@@ -60,14 +60,14 @@ export class AlexaSkillStack extends Stack {
                     ...config.environment,
                     TABLE_NAME: userTable.ref,
                     ASSET_BUCKET: assetBucket.bucketName,
-                    ASSET_BUCKET_URL: assetBucket.bucketUrl,
+                    ASSET_BUCKET_URL: assetBucket.bucketWebsiteUrl,
                     SKILL_ID: config.skillId,
                     ...config.thundraKey && { thundra_apiKey: config.thundraKey },
                 },
             },
             ...config.thundraKey && {
                 runtime: 'provided',
-                layers: [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:7`],
+                layers: [`arn:aws:lambda:${aws.region}:269863060030:layer:thundra-lambda-node-layer:12`],
             },
         });
 

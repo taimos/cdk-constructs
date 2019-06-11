@@ -81,6 +81,7 @@
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
 					<li><span class="tsd-signature-type">IConstruct</span></li>
+					<li><span class="tsd-signature-type">ITaggable</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -97,12 +98,10 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#accountid" class="tsd-kind-icon">account<wbr>Id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#autodeploy" class="tsd-kind-icon">auto<wbr>Deploy</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#dependencyroots" class="tsd-kind-icon">dependency<wbr>Roots</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#dependencies" class="tsd-kind-icon">dependencies</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#env" class="tsd-kind-icon">env</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#environment" class="tsd-kind-icon">environment</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#logicalids" class="tsd-kind-icon">logical<wbr>Ids</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#missingcontext" class="tsd-kind-icon">missing<wbr>Context</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#node" class="tsd-kind-icon">node</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#notificationarns" class="tsd-kind-icon">notification<wbr>Arns</a></li>
@@ -110,6 +109,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#region" class="tsd-kind-icon">region</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#stackid" class="tsd-kind-icon">stack<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#stackname" class="tsd-kind-icon">stack<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#tags" class="tsd-kind-icon">tags</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#templateoptions" class="tsd-kind-icon">template<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#urlsuffix" class="tsd-kind-icon">url<wbr>Suffix</a></li>
 							</ul>
@@ -118,7 +118,6 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#adddependency" class="tsd-kind-icon">add<wbr>Dependency</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#dependencies" class="tsd-kind-icon">dependencies</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#findresource" class="tsd-kind-icon">find<wbr>Resource</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#formatarn" class="tsd-kind-icon">format<wbr>Arn</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#parentapp" class="tsd-kind-icon">parent<wbr>App</a></li>
@@ -128,13 +127,15 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#reportmissingcontext" class="tsd-kind-icon">report<wbr>Missing<wbr>Context</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#requireaccountid" class="tsd-kind-icon">require<wbr>Account<wbr>Id</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#requireregion" class="tsd-kind-icon">require<wbr>Region</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#resolve" class="tsd-kind-icon">resolve</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#setparametervalue" class="tsd-kind-icon">set<wbr>Parameter<wbr>Value</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="alexaskillstack.html#synthesize" class="tsd-kind-icon">synthesize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected"><a href="alexaskillstack.html#synthesize" class="tsd-kind-icon">synthesize</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#tojsonstring" class="tsd-kind-icon">to<wbr>Json<wbr>String</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="alexaskillstack.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="alexaskillstack.html#validate" class="tsd-kind-icon">validate</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="alexaskillstack.html#annotatephysicalname" class="tsd-kind-icon">annotate<wbr>Physical<wbr>Name</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="alexaskillstack.html#isconstruct" class="tsd-kind-icon">is<wbr>Construct</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="alexaskillstack.html#isstack" class="tsd-kind-icon">is<wbr>Stack</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="alexaskillstack.html#of" class="tsd-kind-icon">of</a></li>
 							</ul>
 						</section>
 					</div>
@@ -153,7 +154,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides Stack.__constructor</p>
 								<ul>
-									<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/1e04fc2/lib/alexa/skill.ts#L27">alexa/skill.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/704165f/lib/alexa/skill.ts#L27">alexa/skill.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -179,7 +180,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.accountId</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:166</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:162</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -192,42 +193,19 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="autodeploy" class="tsd-anchor"></a>
-					<h3>auto<wbr>Deploy</h3>
-					<div class="tsd-signature tsd-kind-icon">auto<wbr>Deploy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="dependencies" class="tsd-anchor"></a>
+					<h3>dependencies</h3>
+					<div class="tsd-signature tsd-kind-icon">dependencies<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Stack</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from Stack.autoDeploy</p>
+						<p>Inherited from Stack.dependencies</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:92</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:154</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Should the Stack be deployed when running <code>cdk deploy</code> without arguments
-								(and listed when running <code>cdk synth</code> without arguments).
-								Setting this to <code>false</code> is useful when you have a Stack in your CDK app
-								that you don&#39;t want to deploy using the CDK toolkit -
-							for example, because you&#39;re planning on deploying it through CodePipeline.</p>
+							<p>Return the stacks this stack depends on</p>
 						</div>
-						<p>By default, this is <code>true</code>.</p>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="dependencyroots" class="tsd-anchor"></a>
-					<h3>dependency<wbr>Roots</h3>
-					<div class="tsd-signature tsd-kind-icon">dependency<wbr>Roots<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IConstruct</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from Construct.dependencyRoots</p>
-						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/construct.d.ts:269</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The set of constructs that form the root of this dependable</p>
-						</div>
-						<p>All resources under all returned constructs are included in the ordering
-						dependency.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
@@ -237,7 +215,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.env</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:67</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:58</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -253,7 +231,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.environment</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:118</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:105</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -269,7 +247,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.logicalIds</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:71</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:62</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -279,39 +257,13 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-					<a name="missingcontext" class="tsd-anchor"></a>
-					<h3>missing<wbr>Context</h3>
-					<div class="tsd-signature tsd-kind-icon">missing<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from Stack.missingContext</p>
-						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:61</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Lists all missing contextual information.
-								This is returned when the stack is synthesized under the &#39;missing&#39; attribute
-							and allows tooling to obtain the context and re-synthesize.</p>
-						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">MissingContext</span></h5>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="name" class="tsd-anchor"></a>
 					<h3>name</h3>
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.name</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:82</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:73</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -329,12 +281,12 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Construct.node</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/construct.d.ts:262</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/construct.d.ts:241</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Construct node.</p>
+							<p>Construct tree node which offers APIs for interacting with the construct tree.</p>
 						</div>
 					</div>
 				</section>
@@ -345,7 +297,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.notificationArns</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:198</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:194</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -361,7 +313,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.partition</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:178</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:174</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -377,7 +329,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.region</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:174</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:170</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -396,7 +348,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.stackId</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:188</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:184</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -417,7 +369,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.stackName</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:194</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:190</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -428,13 +380,29 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="tags" class="tsd-anchor"></a>
+					<h3>tags</h3>
+					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TagManager</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Stack.tags</p>
+						<ul>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:54</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Tags to be applied to the stack.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="templateoptions" class="tsd-anchor"></a>
 					<h3>template<wbr>Options</h3>
 					<div class="tsd-signature tsd-kind-icon">template<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ITemplateOptions</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.templateOptions</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:75</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:66</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -450,7 +418,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Stack.urlSuffix</p>
 						<ul>
-							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:182</li>
+							<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:178</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -473,7 +441,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.addDependency</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:154</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:150</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -495,40 +463,17 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-					<a name="dependencies" class="tsd-anchor"></a>
-					<h3>dependencies</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">dependencies<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stack</span><span class="tsd-signature-symbol">[]</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from Stack.dependencies</p>
-								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:158</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Return the stacks this stack depends on</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Stack</span><span class="tsd-signature-symbol">[]</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="findresource" class="tsd-anchor"></a>
 					<h3>find<wbr>Resource</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">find<wbr>Resource<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CfnResource</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+						<li class="tsd-signature tsd-kind-icon">find<wbr>Resource<span class="tsd-signature-symbol">(</span>constructPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CfnResource</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.findResource</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:124</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:111</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -539,7 +484,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>path: <span class="tsd-signature-type">string</span></h5>
+									<h5>constructPath: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">CfnResource</span>
@@ -561,7 +506,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.formatArn</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:216</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:212</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -599,7 +544,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.parentApp</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:138</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:133</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">App</span>
@@ -620,7 +565,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.parseArn</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:254</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:251</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -651,9 +596,15 @@
 							<ul class="tsd-parameters">
 								<li>
 									<h5>arn: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The ARN string to parse</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> sepIfToken: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The separator used to separate resource from resourceName</p>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> hasName: <span class="tsd-signature-type">boolean</span></h5>
@@ -682,7 +633,7 @@
 								<p>Inherited from Stack.prepare</p>
 								<p>Overrides Construct.prepare</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:268</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:265</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -707,7 +658,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.renameLogical</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:150</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:146</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -732,34 +683,29 @@
 					<a name="reportmissingcontext" class="tsd-anchor"></a>
 					<h3>report<wbr>Missing<wbr>Context</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">report<wbr>Missing<wbr>Context<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, details<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MissingContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">report<wbr>Missing<wbr>Context<span class="tsd-signature-symbol">(</span>report<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MissingContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.reportMissingContext</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:146</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:142</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Indicate that a context key was expected</p>
 								</div>
-								<p>Contains instructions on how the key should be supplied.</p>
+								<p>Contains instructions which will be emitted into the cloud assembly on how
+								the key should be supplied.</p>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<h5>report: <span class="tsd-signature-type">MissingContext</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Key that uniquely identifies this missing context.</p>
-									</div>
-								</li>
-								<li>
-									<h5>details: <span class="tsd-signature-type">MissingContext</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The set of parameters needed to obtain the context (specific to context provider).</p>
+										<p>The set of parameters needed to obtain the context</p>
 									</div>
 								</li>
 							</ul>
@@ -778,7 +724,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.requireAccountId</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:137</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:132</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -812,7 +758,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.requireRegion</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:129</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:124</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -832,6 +778,35 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="resolve" class="tsd-anchor"></a>
+					<h3>resolve</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">resolve<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Stack.resolve</p>
+								<ul>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:115</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Resolve a tokenized value in the context of the current stack.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>obj: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="setparametervalue" class="tsd-anchor"></a>
 					<h3>set<wbr>Parameter<wbr>Value</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -842,7 +817,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.setParameterValue</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:260</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:257</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -869,18 +844,19 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
 					<a name="synthesize" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> synthesize</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
 						<li class="tsd-signature tsd-kind-icon">synthesize<span class="tsd-signature-symbol">(</span>session<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ISynthesisSession</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.synthesize</p>
+								<p>Overrides Construct.synthesize</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:269</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:266</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -890,6 +866,35 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="tojsonstring" class="tsd-anchor"></a>
+					<h3>to<wbr>Json<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Json<wbr>String<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Stack.toJsonString</p>
+								<ul>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:119</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Convert an object, potentially containing tokens, to a JSON string</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>obj: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -904,7 +909,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Construct.toString</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/construct.d.ts:282</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/construct.d.ts:254</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -927,7 +932,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Construct.validate</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/construct.d.ts:291</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/construct.d.ts:263</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -943,51 +948,17 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-					<a name="annotatephysicalname" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> annotate<wbr>Physical<wbr>Name</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">annotate<wbr>Physical<wbr>Name<span class="tsd-signature-symbol">(</span>construct<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Construct</span>, physicalName<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from Stack.annotatePhysicalName</p>
-								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:48</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Adds a metadata annotation &quot;aws:cdk:physical-name&quot; to the construct if physicalName
-										is non-null. This can be used later by tools and aspects to determine if resources
-									have been created with physical names.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>construct: <span class="tsd-signature-type">Construct</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> physicalName: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
 					<a name="isconstruct" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> is<wbr>Construct</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Construct<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IConstruct</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Construct<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from Construct.isConstruct</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/construct.d.ts:258</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/construct.d.ts:237</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -998,7 +969,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>x: <span class="tsd-signature-type">IConstruct</span></h5>
+									<h5>x: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -1016,7 +987,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Stack.isStack</p>
 								<ul>
-									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:54</li>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:45</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1032,6 +1003,38 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+					<a name="of" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> of</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">of<span class="tsd-signature-symbol">(</span>construct<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IConstruct</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stack</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Stack.of</p>
+								<ul>
+									<li>Defined in /Users/hoegertn/repo/cdk-constructs/node_modules/@aws-cdk/cdk/lib/stack.d.ts:50</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Looks up the first stack scope in which <code>construct</code> is defined. Fails if there is no stack up the tree.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>construct: <span class="tsd-signature-type">IConstruct</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The construct to start the search from.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Stack</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -1062,10 +1065,7 @@
 								<a href="alexaskillstack.html#accountid" class="tsd-kind-icon">account<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="alexaskillstack.html#autodeploy" class="tsd-kind-icon">auto<wbr>Deploy</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="alexaskillstack.html#dependencyroots" class="tsd-kind-icon">dependency<wbr>Roots</a>
+								<a href="alexaskillstack.html#dependencies" class="tsd-kind-icon">dependencies</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="alexaskillstack.html#env" class="tsd-kind-icon">env</a>
@@ -1075,9 +1075,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="alexaskillstack.html#logicalids" class="tsd-kind-icon">logical<wbr>Ids</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="alexaskillstack.html#missingcontext" class="tsd-kind-icon">missing<wbr>Context</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="alexaskillstack.html#name" class="tsd-kind-icon">name</a>
@@ -1101,6 +1098,9 @@
 								<a href="alexaskillstack.html#stackname" class="tsd-kind-icon">stack<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="alexaskillstack.html#tags" class="tsd-kind-icon">tags</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="alexaskillstack.html#templateoptions" class="tsd-kind-icon">template<wbr>Options</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
@@ -1108,9 +1108,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="alexaskillstack.html#adddependency" class="tsd-kind-icon">add<wbr>Dependency</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="alexaskillstack.html#dependencies" class="tsd-kind-icon">dependencies</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="alexaskillstack.html#findresource" class="tsd-kind-icon">find<wbr>Resource</a>
@@ -1140,10 +1137,16 @@
 								<a href="alexaskillstack.html#requireregion" class="tsd-kind-icon">require<wbr>Region</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="alexaskillstack.html#resolve" class="tsd-kind-icon">resolve</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="alexaskillstack.html#setparametervalue" class="tsd-kind-icon">set<wbr>Parameter<wbr>Value</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-protected">
 								<a href="alexaskillstack.html#synthesize" class="tsd-kind-icon">synthesize</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="alexaskillstack.html#tojsonstring" class="tsd-kind-icon">to<wbr>Json<wbr>String</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="alexaskillstack.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
@@ -1152,13 +1155,13 @@
 								<a href="alexaskillstack.html#validate" class="tsd-kind-icon">validate</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
-								<a href="alexaskillstack.html#annotatephysicalname" class="tsd-kind-icon">annotate<wbr>Physical<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
 								<a href="alexaskillstack.html#isconstruct" class="tsd-kind-icon">is<wbr>Construct</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
 								<a href="alexaskillstack.html#isstack" class="tsd-kind-icon">is<wbr>Stack</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="alexaskillstack.html#of" class="tsd-kind-icon">of</a>
 							</li>
 						</ul>
 					</li>
