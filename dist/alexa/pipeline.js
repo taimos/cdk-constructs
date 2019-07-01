@@ -6,18 +6,18 @@ const aws_codecommit_1 = require("@aws-cdk/aws-codecommit");
 const aws_codepipeline_1 = require("@aws-cdk/aws-codepipeline");
 const aws_codepipeline_actions_1 = require("@aws-cdk/aws-codepipeline-actions");
 const aws_s3_1 = require("@aws-cdk/aws-s3");
-const cdk_1 = require("@aws-cdk/cdk");
-class AlexaSkillPipelineStack extends cdk_1.Stack {
+const core_1 = require("@aws-cdk/core");
+class AlexaSkillPipelineStack extends core_1.Stack {
     constructor(parent, config) {
         super(parent, `${config.skillName}-pipeline`);
         this.templateOptions.description = `The deployment pipeline for ${config.skillName}`;
-        const aws = new cdk_1.ScopedAws(this);
+        const aws = new core_1.ScopedAws(this);
         const pipeline = new aws_codepipeline_1.Pipeline(this, 'Pipeline', {});
         // Source
         let sourceAction;
         const sourceOutput = new aws_codepipeline_1.Artifact('SourceCode');
         if (config.githubOwner && config.githubRepo) {
-            const githubAccessToken = cdk_1.SecretValue.secretsManager(config.githubSecretId || 'GitHub', { jsonField: 'Token' });
+            const githubAccessToken = core_1.SecretValue.secretsManager(config.githubSecretId || 'GitHub', { jsonField: 'Token' });
             sourceAction = new aws_codepipeline_actions_1.GitHubSourceAction({
                 owner: config.githubOwner,
                 repo: config.githubRepo,
@@ -36,11 +36,11 @@ class AlexaSkillPipelineStack extends cdk_1.Stack {
                 actionName: 'CodeCommitSource',
             });
         }
-        const sourceStage = pipeline.addStage({ name: 'Source' });
+        const sourceStage = pipeline.addStage({ stageName: 'Source' });
         sourceStage.addAction(sourceAction);
         // Build
         const buildProject = new aws_codebuild_1.Project(this, 'BuildProject', {
-            buildSpec: {
+            buildSpec: aws_codebuild_1.BuildSpec.fromObject({
                 version: 0.2,
                 phases: {
                     install: {
@@ -75,17 +75,17 @@ class AlexaSkillPipelineStack extends cdk_1.Stack {
                         },
                     },
                 },
-            },
+            }),
             environment: {
                 buildImage: aws_codebuild_1.LinuxBuildImage.UBUNTU_14_04_NODEJS_10_1_0,
             },
             secondaryArtifacts: [
-                new aws_codebuild_1.S3BucketBuildArtifacts({
+                aws_codebuild_1.Artifacts.s3({
                     identifier: 'output',
                     bucket: pipeline.artifactBucket,
                     name: 'output.zip',
                 }),
-                new aws_codebuild_1.S3BucketBuildArtifacts({
+                aws_codebuild_1.Artifacts.s3({
                     identifier: 'assets',
                     bucket: pipeline.artifactBucket,
                     name: 'assets.zip',
@@ -97,14 +97,13 @@ class AlexaSkillPipelineStack extends cdk_1.Stack {
         const buildAction = new aws_codepipeline_actions_1.CodeBuildAction({
             project: buildProject,
             input: sourceOutput,
-            output: buildArtifact,
-            extraOutputs: [assetArtifact],
+            outputs: [buildArtifact, assetArtifact],
             actionName: 'CodeBuild',
         });
-        const buildStage = pipeline.addStage({ name: 'Build' });
+        const buildStage = pipeline.addStage({ stageName: 'Build' });
         buildStage.addAction(buildAction);
         // Deploy
-        const deployStage = pipeline.addStage({ name: 'Deploy' });
+        const deployStage = pipeline.addStage({ stageName: 'Deploy' });
         const stackName = config.skillName;
         const changeSetName = 'StagedChangeSet';
         deployStage.addAction(new aws_codepipeline_actions_1.CloudFormationCreateReplaceChangeSetAction({
@@ -114,7 +113,7 @@ class AlexaSkillPipelineStack extends cdk_1.Stack {
             changeSetName,
             adminPermissions: true,
             templatePath: buildArtifact.atPath('cfn.packaged.yaml'),
-            capabilities: aws_cloudformation_1.CloudFormationCapabilities.NamedIAM,
+            capabilities: [aws_cloudformation_1.CloudFormationCapabilities.NAMED_IAM],
         }));
         const cloudFormationArtifact = new aws_codepipeline_1.Artifact('CloudFormation');
         const executePipeline = new aws_codepipeline_actions_1.CloudFormationExecuteChangeSetAction({
@@ -137,9 +136,9 @@ class AlexaSkillPipelineStack extends cdk_1.Stack {
             runOrder: 4,
             input: buildArtifact,
             parameterOverridesArtifact: cloudFormationArtifact,
-            clientId: cdk_1.SecretValue.secretsManager(config.AlexaSecretId || 'Alexa', { jsonField: 'ClientId' }).toString(),
-            clientSecret: cdk_1.SecretValue.secretsManager(config.AlexaSecretId || 'Alexa', { jsonField: 'ClientSecret' }),
-            refreshToken: cdk_1.SecretValue.secretsManager(config.AlexaSecretId || 'Alexa', { jsonField: 'RefreshToken' }),
+            clientId: core_1.SecretValue.secretsManager(config.AlexaSecretId || 'Alexa', { jsonField: 'ClientId' }).toString(),
+            clientSecret: core_1.SecretValue.secretsManager(config.AlexaSecretId || 'Alexa', { jsonField: 'ClientSecret' }),
+            refreshToken: core_1.SecretValue.secretsManager(config.AlexaSecretId || 'Alexa', { jsonField: 'RefreshToken' }),
             skillId: config.skillId,
         }));
     }

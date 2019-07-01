@@ -1,5 +1,5 @@
 import { expect, haveResource, SynthUtils } from '@aws-cdk/assert';
-import { App, Stack } from '@aws-cdk/cdk';
+import { App, Stack } from '@aws-cdk/core';
 import { SinglePageAppHosting } from '../../lib';
 
 describe('Alexa Skill generation', () => {

@@ -1,7 +1,8 @@
-import { GitHubSource, LinuxBuildImage, Project } from '@aws-cdk/aws-codebuild';
+import { BuildSpec, LinuxBuildImage, Project, Source } from '@aws-cdk/aws-codebuild';
 import { SnsTopic } from '@aws-cdk/aws-events-targets';
 import { Topic } from '@aws-cdk/aws-sns';
-import { App, Stack } from '@aws-cdk/cdk';
+import { EmailSubscription } from '@aws-cdk/aws-sns-subscriptions';
+import { App, Stack } from '@aws-cdk/core';
 
 export interface SimpleCodeBuildConfig {
     githubOwner : string;
@@ -17,7 +18,7 @@ export class SimpleCodeBuildStack extends Stack {
         super(parent, `${config.githubOwner}-${config.githubRepo}-codebuild`);
         this.templateOptions.description = `The CodeBuild project for repo ${config.githubOwner}/${config.githubRepo}`;
 
-        const buildSpec = {
+        const buildSpec = BuildSpec.fromObject({
             version: 0.2,
             phases: {
                 pre_build: {
@@ -30,16 +31,16 @@ export class SimpleCodeBuildStack extends Stack {
                     ],
                 },
             },
-        };
+        });
 
         const alertTopic = new Topic(this, 'AlertTopic', {
             displayName: `Alert Topic for repo ${config.githubOwner}/${config.githubRepo}`,
         });
         if (config.alertEmail) {
-            alertTopic.subscribeEmail('DefaultSubscription', config.alertEmail, { json: false });
+            alertTopic.addSubscription(new EmailSubscription(config.alertEmail, { json: false }));
         }
 
-        const source = new GitHubSource({
+        const source = Source.gitHub({
             owner: config.githubOwner,
             repo: config.githubRepo,
             webhook: true,
@@ -48,7 +49,7 @@ export class SimpleCodeBuildStack extends Stack {
         const buildProject = new Project(this, 'BuildProject', {
             source,
             badge: true,
-            buildSpec: config.useBuildSpecFile ? 'buildspec.yaml' : buildSpec,
+            buildSpec: config.useBuildSpecFile ? BuildSpec.fromSourceFilename('buildspec.yaml') : buildSpec,
             environment: {
                 buildImage: LinuxBuildImage.UBUNTU_14_04_NODEJS_10_1_0,
             },

@@ -5,8 +5,8 @@ const aws_iam_1 = require("@aws-cdk/aws-iam");
 const aws_route53_1 = require("@aws-cdk/aws-route53");
 const aws_route53_targets_1 = require("@aws-cdk/aws-route53-targets");
 const aws_s3_1 = require("@aws-cdk/aws-s3");
-const cdk_1 = require("@aws-cdk/cdk");
-class SinglePageAppHosting extends cdk_1.Construct {
+const core_1 = require("@aws-cdk/core");
+class SinglePageAppHosting extends core_1.Construct {
     constructor(scope, id, props) {
         super(scope, id);
         const zone = aws_route53_1.HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
@@ -14,20 +14,20 @@ class SinglePageAppHosting extends cdk_1.Construct {
             zoneName: props.zoneName,
         });
         const oai = new aws_cloudfront_1.CfnCloudFrontOriginAccessIdentity(this, 'OAI', {
-            cloudFrontOriginAccessIdentityConfig: { comment: cdk_1.Aws.stackName },
+            cloudFrontOriginAccessIdentityConfig: { comment: core_1.Aws.STACK_NAME },
         });
         this.webBucket = new aws_s3_1.Bucket(this, 'WebBucket', { websiteIndexDocument: 'index.html' });
-        this.webBucket.addToResourcePolicy(new aws_iam_1.PolicyStatement()
-            .allow()
-            .addAction('s3:GetObject')
-            .addResource(this.webBucket.arnForObjects('*'))
-            .addCanonicalUserPrincipal(oai.cloudFrontOriginAccessIdentityS3CanonicalUserId));
+        this.webBucket.addToResourcePolicy(new aws_iam_1.PolicyStatement({
+            actions: ['s3:GetObject'],
+            resources: [this.webBucket.arnForObjects('*')],
+            principals: [new aws_iam_1.CanonicalUserPrincipal(oai.attrS3CanonicalUserId)],
+        }));
         this.distribution = new aws_cloudfront_1.CloudFrontWebDistribution(this, 'Distribution', {
             originConfigs: [{
                     behaviors: [{ isDefaultBehavior: true }],
                     s3OriginSource: {
                         s3BucketSource: this.webBucket,
-                        originAccessIdentityId: oai.cloudFrontOriginAccessIdentityId,
+                        originAccessIdentityId: oai.ref,
                     },
                 }],
             aliasConfiguration: {
@@ -44,8 +44,8 @@ class SinglePageAppHosting extends cdk_1.Construct {
                     responsePagePath: '/index.html',
                 }],
             comment: `www.${props.zoneName} Website`,
-            priceClass: aws_cloudfront_1.PriceClass.PriceClassAll,
-            viewerProtocolPolicy: aws_cloudfront_1.ViewerProtocolPolicy.RedirectToHTTPS,
+            priceClass: aws_cloudfront_1.PriceClass.PRICE_CLASS_ALL,
+            viewerProtocolPolicy: aws_cloudfront_1.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         });
         new aws_route53_1.ARecord(this, 'AliasRecord', {
             recordName: `www.${props.zoneName}`,
@@ -64,8 +64,8 @@ class SinglePageAppHosting extends cdk_1.Construct {
             originConfigs: [{
                     behaviors: [{ isDefaultBehavior: true }],
                     customOriginSource: {
-                        domainName: cdk_1.Fn.select(2, cdk_1.Fn.split('/', redirectBucket.bucketWebsiteUrl)),
-                        originProtocolPolicy: aws_cloudfront_1.OriginProtocolPolicy.HttpOnly,
+                        domainName: core_1.Fn.select(2, core_1.Fn.split('/', redirectBucket.attrWebsiteUrl)),
+                        originProtocolPolicy: aws_cloudfront_1.OriginProtocolPolicy.HTTP_ONLY,
                     },
                 }],
             aliasConfiguration: {
@@ -73,8 +73,8 @@ class SinglePageAppHosting extends cdk_1.Construct {
                 names: [props.zoneName],
             },
             comment: `${props.zoneName} Redirect to www.${props.zoneName}`,
-            priceClass: aws_cloudfront_1.PriceClass.PriceClassAll,
-            viewerProtocolPolicy: aws_cloudfront_1.ViewerProtocolPolicy.RedirectToHTTPS,
+            priceClass: aws_cloudfront_1.PriceClass.PRICE_CLASS_ALL,
+            viewerProtocolPolicy: aws_cloudfront_1.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         });
         new aws_route53_1.ARecord(this, 'RedirectAliasRecord', {
             recordName: props.zoneName,

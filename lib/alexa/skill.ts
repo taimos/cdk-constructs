@@ -2,7 +2,7 @@ import { PolicyStatement } from '@aws-cdk/aws-iam';
 import { CfnPermission } from '@aws-cdk/aws-lambda';
 import { Bucket } from '@aws-cdk/aws-s3';
 import { CfnFunction, CfnSimpleTable } from '@aws-cdk/aws-sam';
-import { App, CfnOutput, DeletionPolicy, Fn, ScopedAws, Stack } from '@aws-cdk/cdk';
+import { App, CfnDeletionPolicy, CfnOutput, Fn, ScopedAws, Stack } from '@aws-cdk/core';
 
 export interface AlexaSkillConfig {
     /** The Alexa Skill id */
@@ -41,6 +41,7 @@ export class AlexaSkillStack extends Stack {
                 type: 'String',
             },
         });
+
         const skillFunction = new CfnFunction(this, 'SkillFunction', {
             handler: 'dist/index.handler',
             runtime: 'nodejs8.10',
@@ -49,10 +50,11 @@ export class AlexaSkillStack extends Stack {
             codeUri: './skill/dist/bundle.zip',
             policies: [
                 {
-                    statement: new PolicyStatement()
-                        .addActions('dynamodb:Batch*', 'dynamodb:DeleteItem', 'dynamodb:Get*', 'dynamodb:PutItem', 'dynamodb:UpdateItem', 'dynamodb:Query', 'dynamodb:Scan')
+                    statement: new PolicyStatement({
+                        actions: ['dynamodb:Batch*', 'dynamodb:DeleteItem', 'dynamodb:Get*', 'dynamodb:PutItem', 'dynamodb:UpdateItem', 'dynamodb:Query', 'dynamodb:Scan'],
                         // tslint:disable-next-line:no-invalid-template-strings
-                        .addResource(Fn.sub('arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${AttributesTable}')),
+                        resources: [Fn.sub('arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${AttributesTable}')],
+                    }),
                 },
             ],
             environment: {
@@ -77,8 +79,8 @@ export class AlexaSkillStack extends Stack {
             functionName: Fn.sub('${SkillFunction.Version}'),
             principal: 'alexa-appkit.amazon.com',
         });
-        skillFunctionPermission.options.deletionPolicy = DeletionPolicy.Retain;
-        skillFunctionPermission.options.updateReplacePolicy = DeletionPolicy.Retain;
+        skillFunctionPermission.cfnOptions.deletionPolicy = CfnDeletionPolicy.RETAIN;
+        skillFunctionPermission.cfnOptions.updateReplacePolicy = CfnDeletionPolicy.RETAIN;
 
         const deployOutput = new CfnOutput(this, 'overrides', {
             // tslint:disable-next-line:no-invalid-template-strings

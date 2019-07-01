@@ -1,10 +1,10 @@
 import { CloudFormationCapabilities } from '@aws-cdk/aws-cloudformation';
-import { LinuxBuildImage, Project, S3BucketBuildArtifacts } from '@aws-cdk/aws-codebuild';
+import { Artifacts, BuildSpec, LinuxBuildImage, Project } from '@aws-cdk/aws-codebuild';
 import { Repository } from '@aws-cdk/aws-codecommit';
 import { Artifact, Pipeline } from '@aws-cdk/aws-codepipeline';
 import { AlexaSkillDeployAction, CloudFormationCreateReplaceChangeSetAction, CloudFormationExecuteChangeSetAction, CodeBuildAction, CodeCommitSourceAction, GitHubSourceAction, S3DeployAction } from '@aws-cdk/aws-codepipeline-actions';
 import { Bucket } from '@aws-cdk/aws-s3';
-import { App, ScopedAws, SecretValue, Stack } from '@aws-cdk/cdk';
+import { App, ScopedAws, SecretValue, Stack } from '@aws-cdk/core';
 
 export interface AlexaSkillDeploymentConfig {
     skillId : string;
@@ -47,12 +47,12 @@ export class AlexaSkillPipelineStack extends Stack {
                 actionName: 'CodeCommitSource',
             });
         }
-        const sourceStage = pipeline.addStage({ name: 'Source' });
+        const sourceStage = pipeline.addStage({ stageName: 'Source' });
         sourceStage.addAction(sourceAction);
 
         // Build
         const buildProject = new Project(this, 'BuildProject', {
-            buildSpec: {
+            buildSpec: BuildSpec.fromObject({
                 version: 0.2,
                 phases: {
                     install: {
@@ -87,17 +87,17 @@ export class AlexaSkillPipelineStack extends Stack {
                         },
                     },
                 },
-            },
+            }),
             environment: {
                 buildImage: LinuxBuildImage.UBUNTU_14_04_NODEJS_10_1_0,
             },
             secondaryArtifacts: [
-                new S3BucketBuildArtifacts({
+                Artifacts.s3({
                     identifier: 'output',
                     bucket: pipeline.artifactBucket,
                     name: 'output.zip',
                 }),
-                new S3BucketBuildArtifacts({
+                Artifacts.s3({
                     identifier: 'assets',
                     bucket: pipeline.artifactBucket,
                     name: 'assets.zip',
@@ -111,15 +111,14 @@ export class AlexaSkillPipelineStack extends Stack {
         const buildAction = new CodeBuildAction({
             project: buildProject,
             input: sourceOutput,
-            output: buildArtifact,
-            extraOutputs: [assetArtifact],
+            outputs: [buildArtifact, assetArtifact],
             actionName: 'CodeBuild',
         });
-        const buildStage = pipeline.addStage({ name: 'Build' });
+        const buildStage = pipeline.addStage({ stageName: 'Build' });
         buildStage.addAction(buildAction);
 
         // Deploy
-        const deployStage = pipeline.addStage({ name: 'Deploy' });
+        const deployStage = pipeline.addStage({ stageName: 'Deploy' });
         const stackName = config.skillName;
         const changeSetName = 'StagedChangeSet';
 
@@ -130,7 +129,7 @@ export class AlexaSkillPipelineStack extends Stack {
             changeSetName,
             adminPermissions: true,
             templatePath: buildArtifact.atPath('cfn.packaged.yaml'),
-            capabilities: CloudFormationCapabilities.NamedIAM,
+            capabilities: [CloudFormationCapabilities.NAMED_IAM],
         }));
 
         const cloudFormationArtifact = new Artifact('CloudFormation');

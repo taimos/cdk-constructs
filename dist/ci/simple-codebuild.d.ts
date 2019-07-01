@@ -1,4 +1,4 @@
-import { App, Stack } from '@aws-cdk/cdk';
+import { App, Stack } from '@aws-cdk/core';
 export interface SimpleCodeBuildConfig {
     githubOwner: string;
     githubRepo: string;

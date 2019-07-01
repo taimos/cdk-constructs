@@ -1,6 +1,6 @@
 import { CloudFrontWebDistribution } from '@aws-cdk/aws-cloudfront';
 import { Bucket } from '@aws-cdk/aws-s3';
-import { Construct } from '@aws-cdk/cdk';
+import { Construct } from '@aws-cdk/core';
 export interface SinglePageAppHostingProps {
     certArn: string;
     zoneId: string;

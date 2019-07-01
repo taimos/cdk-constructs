@@ -1,9 +1,9 @@
 import { CfnCloudFrontOriginAccessIdentity, CloudFrontWebDistribution, OriginProtocolPolicy, PriceClass, ViewerProtocolPolicy } from '@aws-cdk/aws-cloudfront';
-import { PolicyStatement } from '@aws-cdk/aws-iam';
+import { CanonicalUserPrincipal, PolicyStatement } from '@aws-cdk/aws-iam';
 import { ARecord, HostedZone, RecordTarget } from '@aws-cdk/aws-route53';
 import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets';
 import { Bucket, CfnBucket } from '@aws-cdk/aws-s3';
-import { App, Aws, CfnOutput, Construct, Fn } from '@aws-cdk/cdk';
+import { App, Aws, CfnOutput, Construct, Fn } from '@aws-cdk/core';
 
 export interface SinglePageAppHostingProps {
     certArn : string;
@@ -26,22 +26,22 @@ export class SinglePageAppHosting extends Construct {
         });
 
         const oai = new CfnCloudFrontOriginAccessIdentity(this, 'OAI', {
-            cloudFrontOriginAccessIdentityConfig: { comment: Aws.stackName },
+            cloudFrontOriginAccessIdentityConfig: { comment: Aws.STACK_NAME },
         });
 
         this.webBucket = new Bucket(this, 'WebBucket', { websiteIndexDocument: 'index.html' });
-        this.webBucket.addToResourcePolicy(new PolicyStatement()
-            .allow()
-            .addAction('s3:GetObject')
-            .addResource(this.webBucket.arnForObjects('*'))
-            .addCanonicalUserPrincipal(oai.cloudFrontOriginAccessIdentityS3CanonicalUserId));
+        this.webBucket.addToResourcePolicy(new PolicyStatement({
+            actions: ['s3:GetObject'],
+            resources: [this.webBucket.arnForObjects('*')],
+            principals: [new CanonicalUserPrincipal(oai.attrS3CanonicalUserId)],
+        }));
 
         this.distribution = new CloudFrontWebDistribution(this, 'Distribution', {
             originConfigs: [{
                 behaviors: [{ isDefaultBehavior: true }],
                 s3OriginSource: {
                     s3BucketSource: this.webBucket,
-                    originAccessIdentityId: oai.cloudFrontOriginAccessIdentityId,
+                    originAccessIdentityId: oai.ref,
                 },
             }],
             aliasConfiguration: {
@@ -58,8 +58,8 @@ export class SinglePageAppHosting extends Construct {
                 responsePagePath: '/index.html',
             }],
             comment: `www.${props.zoneName} Website`,
-            priceClass: PriceClass.PriceClassAll,
-            viewerProtocolPolicy: ViewerProtocolPolicy.RedirectToHTTPS,
+            priceClass: PriceClass.PRICE_CLASS_ALL,
+            viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         });
 
         new ARecord(this, 'AliasRecord', {
@@ -80,8 +80,8 @@ export class SinglePageAppHosting extends Construct {
             originConfigs: [{
                 behaviors: [{ isDefaultBehavior: true }],
                 customOriginSource: {
-                    domainName: Fn.select(2, Fn.split('/', redirectBucket.bucketWebsiteUrl)),
-                    originProtocolPolicy: OriginProtocolPolicy.HttpOnly,
+                    domainName: Fn.select(2, Fn.split('/', redirectBucket.attrWebsiteUrl)),
+                    originProtocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
                 },
             }],
             aliasConfiguration: {
@@ -89,8 +89,8 @@ export class SinglePageAppHosting extends Construct {
                 names: [props.zoneName],
             },
             comment: `${props.zoneName} Redirect to www.${props.zoneName}`,
-            priceClass: PriceClass.PriceClassAll,
-            viewerProtocolPolicy: ViewerProtocolPolicy.RedirectToHTTPS,
+            priceClass: PriceClass.PRICE_CLASS_ALL,
+            viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         });
 
         new ARecord(this, 'RedirectAliasRecord', {
