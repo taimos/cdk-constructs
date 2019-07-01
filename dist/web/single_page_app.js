@@ -5,6 +5,7 @@ const aws_iam_1 = require("@aws-cdk/aws-iam");
 const aws_route53_1 = require("@aws-cdk/aws-route53");
 const aws_route53_targets_1 = require("@aws-cdk/aws-route53-targets");
 const aws_s3_1 = require("@aws-cdk/aws-s3");
+const aws_s3_deployment_1 = require("@aws-cdk/aws-s3-deployment");
 const core_1 = require("@aws-cdk/core");
 class SinglePageAppHosting extends core_1.Construct {
     constructor(scope, id, props) {
@@ -47,6 +48,12 @@ class SinglePageAppHosting extends core_1.Construct {
             priceClass: aws_cloudfront_1.PriceClass.PRICE_CLASS_ALL,
             viewerProtocolPolicy: aws_cloudfront_1.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         });
+        if (props.webFolder) {
+            new aws_s3_deployment_1.BucketDeployment(this, 'DeployWebsite', {
+                source: aws_s3_deployment_1.Source.asset(props.webFolder),
+                destinationBucket: this.webBucket,
+            });
+        }
         new aws_route53_1.ARecord(this, 'AliasRecord', {
             recordName: `www.${props.zoneName}`,
             zone,

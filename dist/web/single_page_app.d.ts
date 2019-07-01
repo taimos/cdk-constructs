@@ -5,6 +5,7 @@ export interface SinglePageAppHostingProps {
     certArn: string;
     zoneId: string;
     zoneName: string;
+    webFolder?: string;
 }
 export declare class SinglePageAppHosting extends Construct {
     readonly webBucket: Bucket;

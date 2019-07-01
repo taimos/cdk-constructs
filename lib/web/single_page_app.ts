@@ -3,12 +3,14 @@ import { CanonicalUserPrincipal, PolicyStatement } from '@aws-cdk/aws-iam';
 import { ARecord, HostedZone, RecordTarget } from '@aws-cdk/aws-route53';
 import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets';
 import { Bucket, CfnBucket } from '@aws-cdk/aws-s3';
-import { App, Aws, CfnOutput, Construct, Fn } from '@aws-cdk/core';
+import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
+import { Aws, Construct, Fn } from '@aws-cdk/core';
 
 export interface SinglePageAppHostingProps {
     certArn : string;
     zoneId : string;
     zoneName : string;
+    webFolder? : string;
 }
 
 export class SinglePageAppHosting extends Construct {
@@ -61,6 +63,13 @@ export class SinglePageAppHosting extends Construct {
             priceClass: PriceClass.PRICE_CLASS_ALL,
             viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         });
+
+        if (props.webFolder) {
+            new BucketDeployment(this, 'DeployWebsite', {
+                source: Source.asset(props.webFolder),
+                destinationBucket: this.webBucket,
+            });
+        }
 
         new ARecord(this, 'AliasRecord', {
             recordName: `www.${props.zoneName}`,
