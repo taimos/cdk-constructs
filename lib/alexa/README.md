@@ -1,6 +1,6 @@
 # Alexa Deployment Pipeline
 
-This construct creates a CodePipeline to deploy Alexa Skills to Lambda and to the Developer console usning AWS SAM and teh DeployToAlexa action of CodePipeline.
+This construct creates a CodePipeline to deploy Alexa Skills to Lambda and to the Developer console using AWS SAM and the DeployToAlexa action of CodePipeline.
 
 ## Prerequisits
 
@@ -10,7 +10,7 @@ You need to create secrets in SecretManager containing access to the Alexa Devel
 
 First of all, generate a client and a token using the official documentation: https://developer.amazon.com/docs/smapi/ask-cli-command-reference.html#generate-lwa-tokens
 
-The create a Secret with the field: `ClientId`, `ClientSecret` and `RefreshToken`
+The create a Secret with the fields: `ClientId`, `ClientSecret` and `RefreshToken`
 
 ### GitHub
 
@@ -41,8 +41,8 @@ app.run();
 The following options can be specified:
 
 * `skillId` - Skill Id in the develoepr console (mandatory)
-* `skillName` - Skill name without spaces or special characters. (mandatory)
-* `branch` - The branch to deploy. (Default `master`)
+* `skillName` - Skill name without spaces or special characters (mandatory)
+* `branch` - The branch to deploy (Default `master`)
 * `githubOwner` - The owner of the GitHub project
 * `githubRepo` - The repo name in GitHub
 * `githubSecretId` - The name of the SecretsManager secret containing the GitHub token (Default: `GitHub`)
