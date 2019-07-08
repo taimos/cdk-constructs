@@ -7,10 +7,10 @@ import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import { Aws, Construct, Fn } from '@aws-cdk/core';
 
 export interface SinglePageAppHostingProps {
-    certArn : string;
-    zoneId : string;
-    zoneName : string;
-    webFolder? : string;
+    readonly certArn : string;
+    readonly zoneId : string;
+    readonly zoneName : string;
+    readonly webFolder? : string;
 }
 
 export class SinglePageAppHosting extends Construct {

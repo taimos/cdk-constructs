@@ -8,3 +8,9 @@ tsconfig.json
 tslint.json
 .idea/
 .editorconfig
+
+# Exclude jsii outdir
+dist
+
+# Include .jsii
+!.jsii

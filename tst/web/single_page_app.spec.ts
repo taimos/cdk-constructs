@@ -1,5 +1,5 @@
-import { expect, haveResource, SynthUtils } from '@aws-cdk/assert';
-import { App, Stack } from '@aws-cdk/core';
+import { expect, haveResource } from '@aws-cdk/assert';
+import { Stack } from '@aws-cdk/core';
 import { SinglePageAppHosting } from '../../lib';
 
 describe('Alexa Skill generation', () => {
@@ -13,7 +13,7 @@ describe('Alexa Skill generation', () => {
         });
 
         expect(stack).to(haveResource('AWS::CloudFront::Distribution'));
-        console.log(JSON.stringify(SynthUtils.toCloudFormation(stack, {}), null, 2));
+        // console.log(JSON.stringify(SynthUtils.toCloudFormation(stack, {}), null, 2));
     });
 
 });

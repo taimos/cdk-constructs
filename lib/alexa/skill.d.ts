@@ -1,20 +1,20 @@
 import { App, Stack } from '@aws-cdk/core';
 export interface AlexaSkillConfig {
     /** The Alexa Skill id */
-    skillId: string;
+    readonly skillId: string;
     /** The Alexa Skill name */
-    skillName: string;
+    readonly skillName: string;
     /** Optional API Key for Thundra */
-    thundraKey?: string;
+    readonly thundraKey?: string;
     /** Environement variables for the Lambda function */
-    environment?: {
+    readonly environment?: {
         [key: string]: string;
     };
     /**
      * name of the user attribute for DynamoDB
      * @default id
      */
-    userAttribute?: string;
+    readonly userAttribute?: string;
 }
 export declare class AlexaSkillStack extends Stack {
     constructor(parent: App, config: AlexaSkillConfig);

@@ -6,22 +6,22 @@ import { App, CfnDeletionPolicy, CfnOutput, Fn, ScopedAws, Stack } from '@aws-cd
 
 export interface AlexaSkillConfig {
     /** The Alexa Skill id */
-    skillId : string;
+    readonly skillId : string;
 
     /** The Alexa Skill name */
-    skillName : string;
+    readonly skillName : string;
 
     /** Optional API Key for Thundra */
-    thundraKey? : string;
+    readonly thundraKey? : string;
 
     /** Environement variables for the Lambda function */
-    environment? : { [key : string] : string };
+    readonly environment? : { [key : string] : string };
 
     /**
      * name of the user attribute for DynamoDB
      * @default id
      */
-    userAttribute? : string;
+    readonly userAttribute? : string;
 }
 
 export class AlexaSkillStack extends Stack {
@@ -42,7 +42,7 @@ export class AlexaSkillStack extends Stack {
             },
         });
 
-        const skillFunction = new CfnFunction(this, 'SkillFunction', {
+        new CfnFunction(this, 'SkillFunction', {
             handler: 'dist/index.handler',
             runtime: 'nodejs8.10',
             timeout: 10,
@@ -82,7 +82,7 @@ export class AlexaSkillStack extends Stack {
         skillFunctionPermission.cfnOptions.deletionPolicy = CfnDeletionPolicy.RETAIN;
         skillFunctionPermission.cfnOptions.updateReplacePolicy = CfnDeletionPolicy.RETAIN;
 
-        const deployOutput = new CfnOutput(this, 'overrides', {
+        new CfnOutput(this, 'overrides', {
             // tslint:disable-next-line:no-invalid-template-strings
             value: Fn.sub('{"manifest": {"apis": {"custom": {"endpoint": {"uri": "${SkillFunction.Version}"}}}}}'),
         });

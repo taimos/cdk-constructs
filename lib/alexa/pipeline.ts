@@ -7,13 +7,13 @@ import { Bucket } from '@aws-cdk/aws-s3';
 import { App, ScopedAws, SecretValue, Stack } from '@aws-cdk/core';
 
 export interface AlexaSkillDeploymentConfig {
-    skillId : string;
-    skillName : string;
-    branch? : string;
-    githubOwner? : string;
-    githubRepo? : string;
-    githubSecretId? : string;
-    AlexaSecretId? : string;
+    readonly skillId : string;
+    readonly skillName : string;
+    readonly branch? : string;
+    readonly githubOwner? : string;
+    readonly githubRepo? : string;
+    readonly githubSecretId? : string;
+    readonly alexaSecretId? : string;
 }
 
 export class AlexaSkillPipelineStack extends Stack {
@@ -156,9 +156,9 @@ export class AlexaSkillPipelineStack extends Stack {
             runOrder: 4,
             input: buildArtifact,
             parameterOverridesArtifact: cloudFormationArtifact,
-            clientId: SecretValue.secretsManager(config.AlexaSecretId || 'Alexa', {jsonField: 'ClientId'}).toString(),
-            clientSecret: SecretValue.secretsManager(config.AlexaSecretId || 'Alexa', {jsonField: 'ClientSecret'}),
-            refreshToken: SecretValue.secretsManager(config.AlexaSecretId || 'Alexa', {jsonField: 'RefreshToken'}),
+            clientId: SecretValue.secretsManager(config.alexaSecretId || 'Alexa', {jsonField: 'ClientId'}).toString(),
+            clientSecret: SecretValue.secretsManager(config.alexaSecretId || 'Alexa', {jsonField: 'ClientSecret'}),
+            refreshToken: SecretValue.secretsManager(config.alexaSecretId || 'Alexa', {jsonField: 'RefreshToken'}),
             skillId: config.skillId,
         }));
     }

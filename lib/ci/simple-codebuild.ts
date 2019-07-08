@@ -5,12 +5,12 @@ import { EmailSubscription } from '@aws-cdk/aws-sns-subscriptions';
 import { App, Stack } from '@aws-cdk/core';
 
 export interface SimpleCodeBuildConfig {
-    githubOwner : string;
-    githubRepo : string;
-    branch? : string;
-    githubSecretId? : string;
-    useBuildSpecFile? : boolean;
-    alertEmail? : string;
+    readonly githubOwner : string;
+    readonly githubRepo : string;
+    readonly branch? : string;
+    readonly githubSecretId? : string;
+    readonly useBuildSpecFile? : boolean;
+    readonly alertEmail? : string;
 }
 
 export class SimpleCodeBuildStack extends Stack {

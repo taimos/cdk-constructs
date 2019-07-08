@@ -2,28 +2,42 @@
   "name": "taimos-cdk-constructs",
   "version": "1.0.0",
   "description": "Higher level constructs for AWS CDK",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
-    "clean": "rimraf coverage dist doc",
-    "compile": "tsc -p tsconfig.json",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "clean": "rimraf coverage dist doc 'lib/**/*.js' 'lib/**/*.d.ts' 'tst/**/*.js' 'tst/**/*.d.ts'",
     "test": "nyc -x tst -e .ts --temp-directory 'coverage/nyc-output' -r html -r text-summary -r cobertura _mocha --require ts-node/register 'tst/**/*.spec.ts' --reporter nyan",
     "doc": "typedoc --excludeExternals --mode file --out doc lib/",
-    "build": "npm-run-all clean compile lint test doc",
-    "prerelease": "npm run build",
-    "release": "git add -A && standard-version -a"
+    "build": "jsii",
+    "watch": "jsii -w",
+    "package": "npm run clean && npm run build && npm run doc && jsii-pacmak",
+    "cdk": "cdk"
   },
-  "standard-version": {
-    "scripts": {
-      "posttag": "git push && git push --tags"
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "jsii": {
+    "outdir": "dist",
+    "targets": {
+      "java": {
+        "package": "de.taimos.cdk",
+        "maven": {
+          "groupId": "de.taimos",
+          "artifactId": "cdk"
+        }
+      },
+      "python": {
+        "distName": "taimos-cdk",
+        "module": "taimos_cdk"
+      }
     }
   },
   "keywords": [
     "Cloudformation",
     "CDK"
   ],
-  "author": "Taimos GmbH",
+  "author": {
+    "email": "thorsten.hoeger@taimos.de",
+    "name": "Thorsten Hoeger",
+    "url": "https://www.taimos.de"
+  },
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -33,17 +47,17 @@
     "@aws-cdk/assert": "^0.37.0",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.7",
-    "@types/node": "^12.0.10",
+    "@types/node": "12.0.10",
     "@types/sinon": "^7.0.13",
     "aws-cdk": "^0.37.0",
     "chai": "^4.2.0",
+    "jsii": "^0.13.3",
+    "jsii-pacmak": "^0.13.3",
     "mocha": "^6.1.4",
     "nock": "^10.0.6",
-    "npm-run-all": "^4.1.5",
     "nyc": "^14.1.1",
     "rimraf": "^2.6.3",
     "sinon": "^7.3.2",
-    "standard-version": "^6.0.1",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "typedoc": "^0.14.2",
@@ -51,6 +65,7 @@
   },
   "dependencies": {
     "@aws-cdk/alexa-ask": "^0.37.0",
+    "@aws-cdk/aws-cloudfront": "^0.37.0",
     "@aws-cdk/aws-cloudformation": "^0.37.0",
     "@aws-cdk/aws-codebuild": "^0.37.0",
     "@aws-cdk/aws-codecommit": "^0.37.0",
@@ -61,6 +76,24 @@
     "@aws-cdk/aws-iam": "^0.37.0",
     "@aws-cdk/aws-secretsmanager": "^0.37.0",
     "@aws-cdk/aws-sam": "^0.37.0",
+    "@aws-cdk/aws-s3-deployment": "^0.37.0",
+    "@aws-cdk/aws-sns-subscriptions": "^0.37.0",
+    "@aws-cdk/core": "^0.37.0"
+  },
+  "peerDependencies": {
+    "@aws-cdk/alexa-ask": "^0.37.0",
+    "@aws-cdk/aws-cloudfront": "^0.37.0",
+    "@aws-cdk/aws-cloudformation": "^0.37.0",
+    "@aws-cdk/aws-codebuild": "^0.37.0",
+    "@aws-cdk/aws-codecommit": "^0.37.0",
+    "@aws-cdk/aws-codepipeline": "^0.37.0",
+    "@aws-cdk/aws-events-targets": "^0.37.0",
+    "@aws-cdk/aws-codepipeline-actions": "^0.37.0",
+    "@aws-cdk/aws-ecr": "^0.37.0",
+    "@aws-cdk/aws-iam": "^0.37.0",
+    "@aws-cdk/aws-secretsmanager": "^0.37.0",
+    "@aws-cdk/aws-sam": "^0.37.0",
+    "@aws-cdk/aws-s3": "^0.37.0",
     "@aws-cdk/aws-s3-deployment": "^0.37.0",
     "@aws-cdk/aws-sns-subscriptions": "^0.37.0",
     "@aws-cdk/core": "^0.37.0"

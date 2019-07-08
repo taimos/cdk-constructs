@@ -1,4 +1,4 @@
-import { expect, haveResource, SynthUtils } from '@aws-cdk/assert';
+import { expect, haveResource } from '@aws-cdk/assert';
 import { App } from '@aws-cdk/core';
 import { AlexaSkillStack } from '../../lib';
 
