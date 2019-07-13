@@ -63,12 +63,12 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="alexa-deployment-pipeline">Alexa Deployment Pipeline</h1>
-				<p>This construct creates a CodePipeline to deploy Alexa Skills to Lambda and to the Developer console usning AWS SAM and teh DeployToAlexa action of CodePipeline.</p>
+				<p>This construct creates a CodePipeline to deploy Alexa Skills to Lambda and to the Developer console using AWS SAM and the DeployToAlexa action of CodePipeline.</p>
 				<h2 id="prerequisits">Prerequisits</h2>
 				<p>You need to create secrets in SecretManager containing access to the Alexa Developer Console and optionally to GitHub when your code resides there.</p>
 				<h3 id="alexa-credentials">Alexa Credentials</h3>
 				<p>First of all, generate a client and a token using the official documentation: <a href="https://developer.amazon.com/docs/smapi/ask-cli-command-reference.html#generate-lwa-tokens">https://developer.amazon.com/docs/smapi/ask-cli-command-reference.html#generate-lwa-tokens</a></p>
-				<p>The create a Secret with the field: <code>ClientId</code>, <code>ClientSecret</code> and <code>RefreshToken</code></p>
+				<p>The create a Secret with the fields: <code>ClientId</code>, <code>ClientSecret</code> and <code>RefreshToken</code></p>
 				<h3 id="github">GitHub</h3>
 				<p>Create a personal access token and store it in a secret with one Key/Value pair named <code>Token</code></p>
 				<h3 id="code-layout">Code layout</h3>
@@ -89,8 +89,8 @@ app.run();</code></pre>
 				<p>The following options can be specified:</p>
 				<ul>
 					<li><code>skillId</code> - Skill Id in the develoepr console (mandatory)</li>
-					<li><code>skillName</code> - Skill name without spaces or special characters. (mandatory)</li>
-					<li><code>branch</code> - The branch to deploy. (Default <code>master</code>)</li>
+					<li><code>skillName</code> - Skill name without spaces or special characters (mandatory)</li>
+					<li><code>branch</code> - The branch to deploy (Default <code>master</code>)</li>
 					<li><code>githubOwner</code> - The owner of the GitHub project</li>
 					<li><code>githubRepo</code> - The repo name in GitHub</li>
 					<li><code>githubSecretId</code> - The name of the SecretsManager secret containing the GitHub token (Default: <code>GitHub</code>)</li>

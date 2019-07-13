@@ -14,3 +14,7 @@ dist
 
 # Include .jsii
 !.jsii
+
+
+# Exclude jsii outdir
+pack
