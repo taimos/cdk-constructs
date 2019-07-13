@@ -12,8 +12,8 @@
     "package": "npm-run-all clean build doc && jsii-pacmak",
     "cdk": "cdk"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "jsii": {
     "outdir": "pack",
     "targets": {
