@@ -2,7 +2,7 @@ import { expect, haveResource } from '@aws-cdk/assert';
 import { Stack } from '@aws-cdk/core';
 import { SinglePageAppHosting } from '../../lib';
 
-describe('Alexa Skill generation', () => {
+describe('Single Page App Hosting', () => {
 
     it('should be valid', () => {
         const stack = new Stack();

@@ -16,6 +16,7 @@ npm install taimos-cdk-constructs
 * [Deployment Pipeline and Skill Blueprint for Alexa](lib/alexa/README.md)
 * [Hosting for Single Page Application](lib/web/single_page_app.ts)
 * [Simple CodeBuild project for NodeJS projects](lib/ci/simple-codebuild.ts)
+* [Scheduled Lambda function](lib/serverless/scheduled-lambda.ts)
 
 # Contributing
 
