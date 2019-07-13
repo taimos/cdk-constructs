@@ -76,6 +76,7 @@
     "@aws-cdk/aws-codepipeline-actions": "^1.0.0",
     "@aws-cdk/aws-ecr": "^1.0.0",
     "@aws-cdk/aws-iam": "^1.0.0",
+    "@aws-cdk/aws-logs": "^1.0.0",
     "@aws-cdk/aws-secretsmanager": "^1.0.0",
     "@aws-cdk/aws-sam": "^1.0.0",
     "@aws-cdk/aws-s3-deployment": "^1.0.0",
@@ -89,15 +90,18 @@
     "@aws-cdk/aws-codebuild": "^1.0.0",
     "@aws-cdk/aws-codecommit": "^1.0.0",
     "@aws-cdk/aws-codepipeline": "^1.0.0",
+    "@aws-cdk/aws-events": "^1.0.0",
     "@aws-cdk/aws-events-targets": "^1.0.0",
     "@aws-cdk/aws-codepipeline-actions": "^1.0.0",
     "@aws-cdk/aws-ecr": "^1.0.0",
     "@aws-cdk/aws-iam": "^1.0.0",
+    "@aws-cdk/aws-lambda": "^1.0.0",
     "@aws-cdk/aws-secretsmanager": "^1.0.0",
     "@aws-cdk/aws-sam": "^1.0.0",
     "@aws-cdk/aws-s3": "^1.0.0",
     "@aws-cdk/aws-s3-deployment": "^1.0.0",
     "@aws-cdk/aws-sns-subscriptions": "^1.0.0",
-    "@aws-cdk/core": "^1.0.0"
+    "@aws-cdk/core": "^1.0.0",
+    "@aws-cdk/aws-logs": "^1.0.0"
   }
 }
