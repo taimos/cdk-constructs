@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Higher level constructs for AWS CDK",
   "scripts": {
-    "clean": "rimraf coverage dist pack doc",
+    "clean": "rimraf coverage dist pack doc 'lib/**/*.js' 'lib/**/*.d.ts' 'tst/**/*.js' 'tst/**/*.d.ts'",
     "test": "nyc -x tst -e .ts --temp-directory 'coverage/nyc-output' -r html -r text-summary -r cobertura _mocha --require ts-node/register 'tst/**/*.spec.ts' --reporter nyan",
     "doc": "typedoc --excludeExternals --mode file --out doc lib/",
     "build": "jsii",
@@ -12,14 +12,10 @@
     "package": "npm-run-all clean build doc && jsii-pacmak",
     "cdk": "cdk"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "jsii": {
     "outdir": "pack",
-    "tsc": {
-      "outDir": "dist",
-      "rootDir": "lib"
-    },
     "targets": {
       "java": {
         "package": "de.taimos.cdk",
@@ -46,7 +42,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/taimos/cdk-constructs.git"
+    "url": "https://github.com/taimos/cdk-constructs"
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.1.0",
