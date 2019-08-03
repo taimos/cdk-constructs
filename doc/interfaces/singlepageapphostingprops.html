@@ -80,6 +80,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="singlepageapphostingprops.html#certarn" class="tsd-kind-icon">cert<wbr>Arn</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="singlepageapphostingprops.html#redirecttoapex" class="tsd-kind-icon">redirect<wbr>ToApex</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="singlepageapphostingprops.html#webfolder" class="tsd-kind-icon">web<wbr>Folder</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="singlepageapphostingprops.html#zoneid" class="tsd-kind-icon">zone<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="singlepageapphostingprops.html#zonename" class="tsd-kind-icon">zone<wbr>Name</a></li>
@@ -96,9 +97,34 @@
 					<div class="tsd-signature tsd-kind-icon">cert<wbr>Arn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/e0fc501/lib/web/single-page-app.ts#L10">web/single-page-app.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/9ac7448/lib/web/single-page-app.ts#L13">web/single-page-app.ts:13</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The ARN of the certificate; Has to be in us-east-1</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="redirecttoapex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> redirect<wbr>ToApex</h3>
+					<div class="tsd-signature tsd-kind-icon">redirect<wbr>ToApex<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/9ac7448/lib/web/single-page-app.ts#L33">web/single-page-app.ts:33</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Define if the main domain is with or without www.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p>false - Redirect example.com to <a href="http://www.example.com">www.example.com</a></p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="webfolder" class="tsd-anchor"></a>
@@ -106,9 +132,21 @@
 					<div class="tsd-signature tsd-kind-icon">web<wbr>Folder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/e0fc501/lib/web/single-page-app.ts#L13">web/single-page-app.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/9ac7448/lib/web/single-page-app.ts#L27">web/single-page-app.ts:27</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>local folder with contents for the website bucket</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><ul>
+									<li>no file deployment</li>
+								</ul>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="zoneid" class="tsd-anchor"></a>
@@ -116,9 +154,14 @@
 					<div class="tsd-signature tsd-kind-icon">zone<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/e0fc501/lib/web/single-page-app.ts#L11">web/single-page-app.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/9ac7448/lib/web/single-page-app.ts#L17">web/single-page-app.ts:17</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>ID of the HostedZone of the domain</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="zonename" class="tsd-anchor"></a>
@@ -126,9 +169,14 @@
 					<div class="tsd-signature tsd-kind-icon">zone<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/e0fc501/lib/web/single-page-app.ts#L12">web/single-page-app.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/taimos/cdk-constructs/blob/9ac7448/lib/web/single-page-app.ts#L21">web/single-page-app.ts:21</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Name of the HostedZone of the domain</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -176,6 +224,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="singlepageapphostingprops.html#certarn" class="tsd-kind-icon">cert<wbr>Arn</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="singlepageapphostingprops.html#redirecttoapex" class="tsd-kind-icon">redirect<wbr>ToApex</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="singlepageapphostingprops.html#webfolder" class="tsd-kind-icon">web<wbr>Folder</a>

@@ -7,10 +7,30 @@ import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
 import { Aws, Construct, Fn } from '@aws-cdk/core';
 
 export interface SinglePageAppHostingProps {
+    /**
+     * The ARN of the certificate; Has to be in us-east-1
+     */
     readonly certArn : string;
+    /**
+     * ID of the HostedZone of the domain
+     */
     readonly zoneId : string;
+    /**
+     * Name of the HostedZone of the domain
+     */
     readonly zoneName : string;
+    /**
+     * local folder with contents for the website bucket
+     *
+     * @default - no file deployment
+     */
     readonly webFolder? : string;
+    /**
+     * Define if the main domain is with or without www.
+     *
+     * @default false - Redirect example.com to www.example.com
+     */
+    readonly redirectToApex? : boolean;
 }
 
 export class SinglePageAppHosting extends Construct {
@@ -21,6 +41,9 @@ export class SinglePageAppHosting extends Construct {
 
     constructor(scope : Construct, id : string, props : SinglePageAppHostingProps) {
         super(scope, id);
+
+        const domainName = props.redirectToApex ? props.zoneName : `www.${props.zoneName}`;
+        const redirectDomainName = props.redirectToApex ? `www.${props.zoneName}` : props.zoneName;
 
         const zone = HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
             hostedZoneId: props.zoneId,
@@ -48,7 +71,7 @@ export class SinglePageAppHosting extends Construct {
             }],
             aliasConfiguration: {
                 acmCertRef: props.certArn,
-                names: [`www.${props.zoneName}`],
+                names: [domainName],
             },
             errorConfigurations: [{
                 errorCode: 403,
@@ -59,7 +82,7 @@ export class SinglePageAppHosting extends Construct {
                 responseCode: 200,
                 responsePagePath: '/index.html',
             }],
-            comment: `www.${props.zoneName} Website`,
+            comment: `${domainName} Website`,
             priceClass: PriceClass.PRICE_CLASS_ALL,
             viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         });
@@ -72,7 +95,7 @@ export class SinglePageAppHosting extends Construct {
         }
 
         new ARecord(this, 'AliasRecord', {
-            recordName: `www.${props.zoneName}`,
+            recordName: domainName,
             zone,
             target: RecordTarget.fromAlias(new CloudFrontTarget(this.distribution)),
         });
@@ -80,7 +103,7 @@ export class SinglePageAppHosting extends Construct {
         const redirectBucket = new CfnBucket(this, 'RedirectBucket', {
             websiteConfiguration: {
                 redirectAllRequestsTo: {
-                    hostName: `www.${props.zoneName}`,
+                    hostName: domainName,
                     protocol: 'https',
                 },
             },
@@ -95,15 +118,15 @@ export class SinglePageAppHosting extends Construct {
             }],
             aliasConfiguration: {
                 acmCertRef: props.certArn,
-                names: [props.zoneName],
+                names: [redirectDomainName],
             },
-            comment: `${props.zoneName} Redirect to www.${props.zoneName}`,
+            comment: `${redirectDomainName} Redirect to ${domainName}`,
             priceClass: PriceClass.PRICE_CLASS_ALL,
             viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         });
 
         new ARecord(this, 'RedirectAliasRecord', {
-            recordName: props.zoneName,
+            recordName: redirectDomainName,
             zone,
             target: RecordTarget.fromAlias(new CloudFrontTarget(redirectDist)),
         });
