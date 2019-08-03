@@ -8,17 +8,19 @@ import { Aws, Construct, Fn } from '@aws-cdk/core';
 
 export interface SinglePageAppHostingProps {
     /**
+     * Name of the HostedZone of the domain
+     */
+    readonly zoneName : string;
+    /**
      * The ARN of the certificate; Has to be in us-east-1
      */
     readonly certArn : string;
     /**
      * ID of the HostedZone of the domain
+     *
+     * @default - lookup zone from context using the zone name
      */
-    readonly zoneId : string;
-    /**
-     * Name of the HostedZone of the domain
-     */
-    readonly zoneName : string;
+    readonly zoneId? : string;
     /**
      * local folder with contents for the website bucket
      *
@@ -45,10 +47,10 @@ export class SinglePageAppHosting extends Construct {
         const domainName = props.redirectToApex ? props.zoneName : `www.${props.zoneName}`;
         const redirectDomainName = props.redirectToApex ? `www.${props.zoneName}` : props.zoneName;
 
-        const zone = HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
+        const zone = props.zoneId ? HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
             hostedZoneId: props.zoneId,
             zoneName: props.zoneName,
-        });
+        }) : HostedZone.fromLookup(this, 'HostedZone', { domainName: props.zoneName });
 
         const oai = new CfnCloudFrontOriginAccessIdentity(this, 'OAI', {
             cloudFrontOriginAccessIdentityConfig: { comment: Aws.STACK_NAME },
