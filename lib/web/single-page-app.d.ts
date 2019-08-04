@@ -8,8 +8,10 @@ export interface SinglePageAppHostingProps {
     readonly zoneName: string;
     /**
      * The ARN of the certificate; Has to be in us-east-1
+     *
+     * @default - create a new certificate in us-east-1
      */
-    readonly certArn: string;
+    readonly certArn?: string;
     /**
      * ID of the HostedZone of the domain
      *

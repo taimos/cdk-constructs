@@ -1,3 +1,4 @@
+import { DnsValidatedCertificate } from '@aws-cdk/aws-certificatemanager';
 import { CfnCloudFrontOriginAccessIdentity, CloudFrontWebDistribution, OriginProtocolPolicy, PriceClass, ViewerProtocolPolicy } from '@aws-cdk/aws-cloudfront';
 import { CanonicalUserPrincipal, PolicyStatement } from '@aws-cdk/aws-iam';
 import { ARecord, HostedZone, RecordTarget } from '@aws-cdk/aws-route53';
@@ -13,8 +14,10 @@ export interface SinglePageAppHostingProps {
     readonly zoneName : string;
     /**
      * The ARN of the certificate; Has to be in us-east-1
+     *
+     * @default - create a new certificate in us-east-1
      */
-    readonly certArn : string;
+    readonly certArn? : string;
     /**
      * ID of the HostedZone of the domain
      *
@@ -52,6 +55,13 @@ export class SinglePageAppHosting extends Construct {
             zoneName: props.zoneName,
         }) : HostedZone.fromLookup(this, 'HostedZone', { domainName: props.zoneName });
 
+        const certArn = props.certArn || new DnsValidatedCertificate(this, 'Certificate', {
+            hostedZone: zone,
+            domainName,
+            subjectAlternativeNames: [redirectDomainName],
+            region: 'us-east-1',
+        }).certificateArn;
+
         const oai = new CfnCloudFrontOriginAccessIdentity(this, 'OAI', {
             cloudFrontOriginAccessIdentityConfig: { comment: Aws.STACK_NAME },
         });
@@ -72,7 +82,7 @@ export class SinglePageAppHosting extends Construct {
                 },
             }],
             aliasConfiguration: {
-                acmCertRef: props.certArn,
+                acmCertRef: certArn,
                 names: [domainName],
             },
             errorConfigurations: [{
@@ -119,7 +129,7 @@ export class SinglePageAppHosting extends Construct {
                 },
             }],
             aliasConfiguration: {
-                acmCertRef: props.certArn,
+                acmCertRef: certArn,
                 names: [redirectDomainName],
             },
             comment: `${redirectDomainName} Redirect to ${domainName}`,

@@ -2,6 +2,7 @@
 
 * Update CDK to version 1.3.0
 * Add `redirectToApex` option to SPA construct
+* Make `certArn` optional for SPA and create new certificate if blank
 
 # 1.0.0
 
