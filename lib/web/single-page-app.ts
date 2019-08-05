@@ -58,7 +58,6 @@ export class SinglePageAppHosting extends Construct {
         const certArn = props.certArn || new DnsValidatedCertificate(this, 'Certificate', {
             hostedZone: zone,
             domainName,
-            subjectAlternativeNames: [redirectDomainName],
             region: 'us-east-1',
         }).certificateArn;
 
@@ -112,6 +111,12 @@ export class SinglePageAppHosting extends Construct {
             target: RecordTarget.fromAlias(new CloudFrontTarget(this.distribution)),
         });
 
+        const redirectCertArn = props.certArn || new DnsValidatedCertificate(this, 'Certificate', {
+            hostedZone: zone,
+            domainName: redirectDomainName,
+            region: 'us-east-1',
+        }).certificateArn;
+
         const redirectBucket = new CfnBucket(this, 'RedirectBucket', {
             websiteConfiguration: {
                 redirectAllRequestsTo: {
@@ -129,7 +134,7 @@ export class SinglePageAppHosting extends Construct {
                 },
             }],
             aliasConfiguration: {
-                acmCertRef: certArn,
+                acmCertRef: redirectCertArn,
                 names: [redirectDomainName],
             },
             comment: `${redirectDomainName} Redirect to ${domainName}`,
