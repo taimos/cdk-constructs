@@ -111,7 +111,7 @@ export class SinglePageAppHosting extends Construct {
             target: RecordTarget.fromAlias(new CloudFrontTarget(this.distribution)),
         });
 
-        const redirectCertArn = props.certArn || new DnsValidatedCertificate(this, 'Certificate', {
+        const redirectCertArn = props.certArn || new DnsValidatedCertificate(this, 'RedirectCertificate', {
             hostedZone: zone,
             domainName: redirectDomainName,
             region: 'us-east-1',

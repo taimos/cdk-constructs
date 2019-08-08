@@ -1,3 +1,6 @@
+# 1.1.1
+* fix bug in `SinglePageAppHosting` with auto-generated cert
+
 # 1.1.0
 
 * Update CDK to version 1.3.0

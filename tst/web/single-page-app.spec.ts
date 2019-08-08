@@ -16,4 +16,15 @@ describe('Single Page App Hosting', () => {
         // console.log(JSON.stringify(SynthUtils.toCloudFormation(stack, {}), null, 2));
     });
 
+    it('should be auto generate certificates', () => {
+        const stack = new Stack();
+        new SinglePageAppHosting(stack, 'SPA', {
+            zoneId: '1234567890',
+            zoneName: 'example.net',
+        });
+
+        expect(stack).to(haveResource('AWS::CloudFront::Distribution'));
+        // console.log(JSON.stringify(SynthUtils.toCloudFormation(stack, {}), null, 2));
+    });
+
 });

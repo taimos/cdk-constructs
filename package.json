@@ -1,6 +1,6 @@
 {
   "name": "taimos-cdk-constructs",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Higher level constructs for AWS CDK",
   "scripts": {
     "clean": "rimraf coverage dist pack doc 'lib/**/*.js' 'lib/**/*.d.ts' 'tst/**/*.js' 'tst/**/*.d.ts'",
@@ -10,7 +10,8 @@
     "watch": "jsii -w",
     "build+test": "npm-run-all clean build test",
     "package": "npm-run-all clean build doc && jsii-pacmak",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "upload": "npm publish pack/js/* && python3 -m twine upload pack/python/*"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
