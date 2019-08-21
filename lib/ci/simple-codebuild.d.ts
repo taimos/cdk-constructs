@@ -3,7 +3,6 @@ export interface SimpleCodeBuildConfig {
     readonly githubOwner: string;
     readonly githubRepo: string;
     readonly branch?: string;
-    readonly githubSecretId?: string;
     readonly useBuildSpecFile?: boolean;
     readonly alertEmail?: string;
 }

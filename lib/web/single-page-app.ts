@@ -102,6 +102,7 @@ export class SinglePageAppHosting extends Construct {
             new BucketDeployment(this, 'DeployWebsite', {
                 source: Source.asset(props.webFolder),
                 destinationBucket: this.webBucket,
+                distribution: this.distribution,
             });
         }
 

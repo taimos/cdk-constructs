@@ -1,3 +1,7 @@
+# 1.2.0
+* Update CDK to version 1.4.0
+* Invalidate CF distibution after deployment
+
 # 1.1.1
 * fix bug in `SinglePageAppHosting` with auto-generated cert
 
