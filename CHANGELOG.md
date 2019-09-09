@@ -1,3 +1,6 @@
+# 1.3.0
+* Update CDK to version 1.7.0
+
 # 1.2.0
 * Update CDK to version 1.5.0
 * Invalidate CF distibution after deployment
