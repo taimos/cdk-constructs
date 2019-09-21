@@ -1,11 +1,12 @@
 import { DnsValidatedCertificate } from '@aws-cdk/aws-certificatemanager';
-import { CfnCloudFrontOriginAccessIdentity, CloudFrontWebDistribution, OriginProtocolPolicy, PriceClass, ViewerProtocolPolicy } from '@aws-cdk/aws-cloudfront';
+import { CfnCloudFrontOriginAccessIdentity, CloudFrontWebDistribution, PriceClass, ViewerProtocolPolicy } from '@aws-cdk/aws-cloudfront';
 import { CanonicalUserPrincipal, PolicyStatement } from '@aws-cdk/aws-iam';
 import { ARecord, HostedZone, RecordTarget } from '@aws-cdk/aws-route53';
+import { HttpsRedirect } from '@aws-cdk/aws-route53-patterns';
 import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets';
-import { Bucket, CfnBucket } from '@aws-cdk/aws-s3';
+import { Bucket } from '@aws-cdk/aws-s3';
 import { BucketDeployment, Source } from '@aws-cdk/aws-s3-deployment';
-import { Aws, Construct, Fn } from '@aws-cdk/core';
+import { Aws, Construct } from '@aws-cdk/core';
 
 export interface SinglePageAppHostingProps {
     /**
@@ -100,7 +101,7 @@ export class SinglePageAppHosting extends Construct {
 
         if (props.webFolder) {
             new BucketDeployment(this, 'DeployWebsite', {
-                source: Source.asset(props.webFolder),
+                sources: [Source.asset(props.webFolder)],
                 destinationBucket: this.webBucket,
                 distribution: this.distribution,
             });
@@ -112,41 +113,10 @@ export class SinglePageAppHosting extends Construct {
             target: RecordTarget.fromAlias(new CloudFrontTarget(this.distribution)),
         });
 
-        const redirectCertArn = props.certArn || new DnsValidatedCertificate(this, 'RedirectCertificate', {
-            hostedZone: zone,
-            domainName: redirectDomainName,
-            region: 'us-east-1',
-        }).certificateArn;
-
-        const redirectBucket = new CfnBucket(this, 'RedirectBucket', {
-            websiteConfiguration: {
-                redirectAllRequestsTo: {
-                    hostName: domainName,
-                    protocol: 'https',
-                },
-            },
-        });
-        const redirectDist = new CloudFrontWebDistribution(this, 'RedirectDistribution', {
-            originConfigs: [{
-                behaviors: [{ isDefaultBehavior: true }],
-                customOriginSource: {
-                    domainName: Fn.select(2, Fn.split('/', redirectBucket.attrWebsiteUrl)),
-                    originProtocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
-                },
-            }],
-            aliasConfiguration: {
-                acmCertRef: redirectCertArn,
-                names: [redirectDomainName],
-            },
-            comment: `${redirectDomainName} Redirect to ${domainName}`,
-            priceClass: PriceClass.PRICE_CLASS_ALL,
-            viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        });
-
-        new ARecord(this, 'RedirectAliasRecord', {
-            recordName: redirectDomainName,
+        new HttpsRedirect(this, 'Redirect', {
             zone,
-            target: RecordTarget.fromAlias(new CloudFrontTarget(redirectDist)),
+            recordNames: [redirectDomainName],
+            targetDomain: domainName,
         });
     }
 }
