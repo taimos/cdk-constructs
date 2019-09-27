@@ -3,3 +3,4 @@ export * from './alexa/skill';
 export * from './ci/simple-codebuild';
 export * from './web/single-page-app';
 export * from './serverless/scheduled-lambda';
+export * from './serverless/internal-rest-api';

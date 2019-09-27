@@ -1,4 +1,4 @@
-import { expect, haveResource, SynthUtils } from '@aws-cdk/assert';
+import { expect, haveResource } from '@aws-cdk/assert';
 import { Schedule } from '@aws-cdk/aws-events';
 import { Code, Runtime } from '@aws-cdk/aws-lambda';
 import { Duration, Stack } from '@aws-cdk/core';
@@ -16,7 +16,7 @@ describe('Scheduled Lambda Function', () => {
         });
 
         expect(stack).to(haveResource('AWS::Lambda::Function'));
-        console.log(JSON.stringify(SynthUtils.toCloudFormation(stack, {}), null, 2));
+        // console.log(JSON.stringify(SynthUtils.toCloudFormation(stack, {}), null, 2));
     });
 
 });

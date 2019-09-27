@@ -76,10 +76,16 @@
     "@aws-cdk/aws-sam": "^1.9.0",
     "@aws-cdk/aws-secretsmanager": "^1.9.0",
     "@aws-cdk/aws-sns-subscriptions": "^1.9.0",
-    "@aws-cdk/core": "^1.9.0"
+    "@aws-cdk/core": "^1.9.0",
+    "@aws-cdk/custom-resources": "^1.9.0"
   },
   "peerDependencies": {
     "@aws-cdk/alexa-ask": "^1.9.0",
+    "@aws-cdk/aws-apigateway": "^1.9.0",
+    "@aws-cdk/aws-ec2": "^1.9.0",
+    "@aws-cdk/aws-certificatemanager": "^1.9.0",
+    "@aws-cdk/aws-elasticloadbalancingv2": "^1.9.0",
+    "@aws-cdk/aws-route53": "^1.9.0",
     "@aws-cdk/aws-cloudfront": "^1.9.0",
     "@aws-cdk/aws-cloudformation": "^1.9.0",
     "@aws-cdk/aws-codebuild": "^1.9.0",
@@ -98,6 +104,7 @@
     "@aws-cdk/aws-s3-deployment": "^1.9.0",
     "@aws-cdk/aws-sns-subscriptions": "^1.9.0",
     "@aws-cdk/core": "^1.9.0",
-    "@aws-cdk/aws-logs": "^1.9.0"
+    "@aws-cdk/aws-logs": "^1.9.0",
+    "@aws-cdk/custom-resources": "^1.9.0"
   }
 }

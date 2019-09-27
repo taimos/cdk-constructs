@@ -20,6 +20,7 @@ pip3 install taimos-cdk
 * [Hosting for Single Page Application](lib/web/single-page-app.ts)
 * [Simple CodeBuild project for NodeJS projects](lib/ci/simple-codebuild.ts)
 * [Scheduled Lambda function](lib/serverless/scheduled-lambda.ts)
+* [VPC Internal REST API](lib/serverless/internal-rest-api.ts)
 
 # Contributing
 
