@@ -61,6 +61,10 @@
   },
   "dependencies": {
     "@aws-cdk/alexa-ask": "^1.11.0",
+    "@aws-cdk/aws-apigateway": "^1.11.0",
+    "@aws-cdk/aws-ec2": "^1.11.0",
+    "@aws-cdk/aws-certificatemanager": "^1.11.0",
+    "@aws-cdk/aws-elasticloadbalancingv2": "^1.11.0",
     "@aws-cdk/aws-cloudformation": "^1.11.0",
     "@aws-cdk/aws-cloudfront": "^1.11.0",
     "@aws-cdk/aws-codebuild": "^1.11.0",
