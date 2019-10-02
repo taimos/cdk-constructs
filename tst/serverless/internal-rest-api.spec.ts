@@ -24,7 +24,7 @@ describe('Internal REST API', () => {
         // writeFileSync('tst/serverless/internal-rest-api.fixture.json', JSON.stringify(SynthUtils.toCloudFormation(stack, {}), null, 2));
     });
 
-    it('should be work with custom api options', () => {
+    it('should be working with custom api options', () => {
         const stack = new Stack();
         const vpc = new Vpc(stack, 'VPC');
 
