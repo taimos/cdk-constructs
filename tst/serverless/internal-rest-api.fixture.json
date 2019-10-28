@@ -458,7 +458,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": {
-            "Ref": "RestApiCertificateCertificateRequestorFunctionCodeS3Bucket168815DA"
+            "Ref": "AssetParameters0b9723d54b7db3fbfc1a143398b02392e5fe080a68535480782a949b4372d0f0S3Bucket0997A4A0"
           },
           "S3Key": {
             "Fn::Join": [
@@ -471,7 +471,7 @@
                       "Fn::Split": [
                         "||",
                         {
-                          "Ref": "RestApiCertificateCertificateRequestorFunctionCodeS3VersionKey2836CCFA"
+                          "Ref": "AssetParameters0b9723d54b7db3fbfc1a143398b02392e5fe080a68535480782a949b4372d0f0S3VersionKey83D9C166"
                         }
                       ]
                     }
@@ -484,7 +484,7 @@
                       "Fn::Split": [
                         "||",
                         {
-                          "Ref": "RestApiCertificateCertificateRequestorFunctionCodeS3VersionKey2836CCFA"
+                          "Ref": "AssetParameters0b9723d54b7db3fbfc1a143398b02392e5fe080a68535480782a949b4372d0f0S3VersionKey83D9C166"
                         }
                       ]
                     }
@@ -501,7 +501,7 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs8.10",
+        "Runtime": "nodejs10.x",
         "Timeout": 900
       },
       "DependsOn": [
@@ -1102,7 +1102,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": {
-            "Ref": "AWS679f53fac002430cb0da5b7982bd2287CodeS3BucketF55839B6"
+            "Ref": "AssetParameters15bc9bc219e7636b5a5b2c24a968fdce7e0c597fb9ac64af69a83942e6f640e0S3BucketBD296F9A"
           },
           "S3Key": {
             "Fn::Join": [
@@ -1115,7 +1115,7 @@
                       "Fn::Split": [
                         "||",
                         {
-                          "Ref": "AWS679f53fac002430cb0da5b7982bd2287CodeS3VersionKey3C45B02F"
+                          "Ref": "AssetParameters15bc9bc219e7636b5a5b2c24a968fdce7e0c597fb9ac64af69a83942e6f640e0S3VersionKey9F83BE86"
                         }
                       ]
                     }
@@ -1128,7 +1128,7 @@
                       "Fn::Split": [
                         "||",
                         {
-                          "Ref": "AWS679f53fac002430cb0da5b7982bd2287CodeS3VersionKey3C45B02F"
+                          "Ref": "AssetParameters15bc9bc219e7636b5a5b2c24a968fdce7e0c597fb9ac64af69a83942e6f640e0S3VersionKey9F83BE86"
                         }
                       ]
                     }
@@ -1145,38 +1145,13 @@
             "Arn"
           ]
         },
-        "Runtime": "nodejs10.x"
+        "Runtime": "nodejs10.x",
+        "Timeout": 30
       },
       "DependsOn": [
         "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleDefaultPolicyD28E1A5E",
         "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2"
       ]
-    }
-  },
-  "Parameters": {
-    "RestApiCertificateCertificateRequestorFunctionCodeS3Bucket168815DA": {
-      "Type": "String",
-      "Description": "S3 bucket for asset \"RestApi/Certificate/CertificateRequestorFunction/Code\""
-    },
-    "RestApiCertificateCertificateRequestorFunctionCodeS3VersionKey2836CCFA": {
-      "Type": "String",
-      "Description": "S3 key for asset version \"RestApi/Certificate/CertificateRequestorFunction/Code\""
-    },
-    "RestApiCertificateCertificateRequestorFunctionCodeArtifactHashC682FBB9": {
-      "Type": "String",
-      "Description": "Artifact hash for asset \"RestApi/Certificate/CertificateRequestorFunction/Code\""
-    },
-    "AWS679f53fac002430cb0da5b7982bd2287CodeS3BucketF55839B6": {
-      "Type": "String",
-      "Description": "S3 bucket for asset \"AWS679f53fac002430cb0da5b7982bd2287/Code\""
-    },
-    "AWS679f53fac002430cb0da5b7982bd2287CodeS3VersionKey3C45B02F": {
-      "Type": "String",
-      "Description": "S3 key for asset version \"AWS679f53fac002430cb0da5b7982bd2287/Code\""
-    },
-    "AWS679f53fac002430cb0da5b7982bd2287CodeArtifactHash49FACC2E": {
-      "Type": "String",
-      "Description": "Artifact hash for asset \"AWS679f53fac002430cb0da5b7982bd2287/Code\""
     }
   },
   "Outputs": {
@@ -1205,6 +1180,32 @@
           ]
         ]
       }
+    }
+  },
+  "Parameters": {
+    "AssetParameters0b9723d54b7db3fbfc1a143398b02392e5fe080a68535480782a949b4372d0f0S3Bucket0997A4A0": {
+      "Type": "String",
+      "Description": "S3 bucket for asset \"0b9723d54b7db3fbfc1a143398b02392e5fe080a68535480782a949b4372d0f0\""
+    },
+    "AssetParameters0b9723d54b7db3fbfc1a143398b02392e5fe080a68535480782a949b4372d0f0S3VersionKey83D9C166": {
+      "Type": "String",
+      "Description": "S3 key for asset version \"0b9723d54b7db3fbfc1a143398b02392e5fe080a68535480782a949b4372d0f0\""
+    },
+    "AssetParameters0b9723d54b7db3fbfc1a143398b02392e5fe080a68535480782a949b4372d0f0ArtifactHashF8F836D1": {
+      "Type": "String",
+      "Description": "Artifact hash for asset \"0b9723d54b7db3fbfc1a143398b02392e5fe080a68535480782a949b4372d0f0\""
+    },
+    "AssetParameters15bc9bc219e7636b5a5b2c24a968fdce7e0c597fb9ac64af69a83942e6f640e0S3BucketBD296F9A": {
+      "Type": "String",
+      "Description": "S3 bucket for asset \"15bc9bc219e7636b5a5b2c24a968fdce7e0c597fb9ac64af69a83942e6f640e0\""
+    },
+    "AssetParameters15bc9bc219e7636b5a5b2c24a968fdce7e0c597fb9ac64af69a83942e6f640e0S3VersionKey9F83BE86": {
+      "Type": "String",
+      "Description": "S3 key for asset version \"15bc9bc219e7636b5a5b2c24a968fdce7e0c597fb9ac64af69a83942e6f640e0\""
+    },
+    "AssetParameters15bc9bc219e7636b5a5b2c24a968fdce7e0c597fb9ac64af69a83942e6f640e0ArtifactHashCEB9D888": {
+      "Type": "String",
+      "Description": "Artifact hash for asset \"15bc9bc219e7636b5a5b2c24a968fdce7e0c597fb9ac64af69a83942e6f640e0\""
     }
   }
 }

@@ -7,7 +7,7 @@ describe('Single Page App Hosting', () => {
     it('should be valid', () => {
         const stack = new Stack();
         new SinglePageAppHosting(stack, 'SPA', {
-            certArn: 'arn:aws:acm:123456789012:eu-central-1/certificate/foobar',
+            certArn: 'arn:aws:acm:us-east-1:123456789012:certificate/foobar',
             zoneId: '1234567890',
             zoneName: 'example.net',
         });

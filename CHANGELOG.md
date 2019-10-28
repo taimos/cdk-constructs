@@ -1,3 +1,6 @@
+# 1.4.0
+* Update CDK to version 1.15.0
+
 # 1.3.0
 * Update CDK to version 1.11.0
 * Use `HttpsRedirect` native construct in `SinglePageAppHosting` **BREAKING**
