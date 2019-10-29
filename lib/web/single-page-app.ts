@@ -1,5 +1,5 @@
-import { DnsValidatedCertificate } from '@aws-cdk/aws-certificatemanager';
-import { CfnCloudFrontOriginAccessIdentity, CloudFrontWebDistribution, PriceClass, ViewerProtocolPolicy } from '@aws-cdk/aws-cloudfront';
+import { Certificate, DnsValidatedCertificate } from '@aws-cdk/aws-certificatemanager';
+import { CfnCloudFrontOriginAccessIdentity, CloudFrontWebDistribution, PriceClass, ViewerCertificate, ViewerProtocolPolicy } from '@aws-cdk/aws-cloudfront';
 import { CanonicalUserPrincipal, PolicyStatement } from '@aws-cdk/aws-iam';
 import { ARecord, HostedZone, RecordTarget } from '@aws-cdk/aws-route53';
 import { HttpsRedirect } from '@aws-cdk/aws-route53-patterns';
@@ -56,11 +56,13 @@ export class SinglePageAppHosting extends Construct {
             zoneName: props.zoneName,
         }) : HostedZone.fromLookup(this, 'HostedZone', { domainName: props.zoneName });
 
-        const certArn = props.certArn || new DnsValidatedCertificate(this, 'Certificate', {
-            hostedZone: zone,
-            domainName,
-            region: 'us-east-1',
-        }).certificateArn;
+        const cert = props.certArn ?
+            Certificate.fromCertificateArn(this, 'Certificate', props.certArn) :
+            new DnsValidatedCertificate(this, 'Certificate', {
+                hostedZone: zone,
+                domainName,
+                region: 'us-east-1',
+            });
 
         const oai = new CfnCloudFrontOriginAccessIdentity(this, 'OAI', {
             cloudFrontOriginAccessIdentityConfig: { comment: Aws.STACK_NAME },
@@ -81,10 +83,9 @@ export class SinglePageAppHosting extends Construct {
                     originAccessIdentityId: oai.ref,
                 },
             }],
-            aliasConfiguration: {
-                acmCertRef: certArn,
-                names: [domainName],
-            },
+            viewerCertificate: ViewerCertificate.fromAcmCertificate(cert, {
+                aliases: [domainName],
+            }),
             errorConfigurations: [{
                 errorCode: 403,
                 responseCode: 200,
