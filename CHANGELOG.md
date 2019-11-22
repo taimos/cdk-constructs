@@ -1,5 +1,6 @@
 # master
 * remove deprecated `aliasConfiguration`
+* Update CDK to version 1.17.1
 
 # 1.4.0
 * Update CDK to version 1.15.0
