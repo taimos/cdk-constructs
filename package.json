@@ -1,6 +1,6 @@
 {
   "name": "taimos-cdk-constructs",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Higher level constructs for AWS CDK",
   "scripts": {
     "clean": "rimraf coverage dist pack doc 'lib/**/*.js' 'lib/**/*.d.ts' 'tst/**/*.js' 'tst/**/*.d.ts'",
