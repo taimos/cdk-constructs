@@ -1,4 +1,6 @@
 # master
+
+# 1.6.0
 * Update CDK to version 1.19.0
 
 # 1.5.0
