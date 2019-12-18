@@ -1,6 +1,5 @@
 import { Certificate, DnsValidatedCertificate } from '@aws-cdk/aws-certificatemanager';
-import { CfnCloudFrontOriginAccessIdentity, CloudFrontWebDistribution, PriceClass, ViewerCertificate, ViewerProtocolPolicy } from '@aws-cdk/aws-cloudfront';
-import { CanonicalUserPrincipal, PolicyStatement } from '@aws-cdk/aws-iam';
+import { CloudFrontWebDistribution, OriginAccessIdentity, PriceClass, ViewerCertificate, ViewerProtocolPolicy } from '@aws-cdk/aws-cloudfront';
 import { ARecord, HostedZone, RecordTarget } from '@aws-cdk/aws-route53';
 import { HttpsRedirect } from '@aws-cdk/aws-route53-patterns';
 import { CloudFrontTarget } from '@aws-cdk/aws-route53-targets';
@@ -64,23 +63,16 @@ export class SinglePageAppHosting extends Construct {
                 region: 'us-east-1',
             });
 
-        const oai = new CfnCloudFrontOriginAccessIdentity(this, 'OAI', {
-            cloudFrontOriginAccessIdentityConfig: { comment: Aws.STACK_NAME },
-        });
-
+        const originAccessIdentity = new OriginAccessIdentity(this, 'OAI', { comment: Aws.STACK_NAME });
         this.webBucket = new Bucket(this, 'WebBucket', { websiteIndexDocument: 'index.html' });
-        this.webBucket.addToResourcePolicy(new PolicyStatement({
-            actions: ['s3:GetObject'],
-            resources: [this.webBucket.arnForObjects('*')],
-            principals: [new CanonicalUserPrincipal(oai.attrS3CanonicalUserId)],
-        }));
+        this.webBucket.grantRead(originAccessIdentity);
 
         this.distribution = new CloudFrontWebDistribution(this, 'Distribution', {
             originConfigs: [{
                 behaviors: [{ isDefaultBehavior: true }],
                 s3OriginSource: {
                     s3BucketSource: this.webBucket,
-                    originAccessIdentityId: oai.ref,
+                    originAccessIdentity,
                 },
             }],
             viewerCertificate: ViewerCertificate.fromAcmCertificate(cert, {
